@@ -1,0 +1,63 @@
+/*includes styling common to all pages*/
+.border
+{
+    border: 2px solid black;
+}
+.border-blue
+{
+    border: 2px solid blue;
+}
+body 
+{
+    display: flex;
+    flex-direction: column;
+}
+
+html
+{
+    height: 100vh;
+    overflow: hidden;
+}
+
+.custom-side-bar
+{
+    width: 20%;
+}
+
+.custom-mdl-layout__content
+{
+    margin-left: 20%;
+}
+.mdl-layout-title
+{
+    font-family: 'Spicy Rice', cursive;
+    font-size: xx-large;
+}
+.mdl-textfield__input
+{
+    border-bottom: 1px solid #000;
+}
+.mdl-textfield__label{
+    color: #000;
+}
+.gotu
+{
+    font-family: 'Gotu', sans-serif;
+}
+a
+{
+    text-decoration: none;
+}
+.top-bar-btn
+{
+    color: #FFFFFF;
+}
+.top-bar-btn:hover
+{
+    border-bottom: 2px solid white;
+    background-color: rgb(233,30,99);
+}
+.blur-filter
+{
+    filter: blur(3px)  brightness(85%);
+}
