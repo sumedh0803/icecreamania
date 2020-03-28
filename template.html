@@ -13,6 +13,19 @@
 </head>
 <body>
 
+    <dialog id="dialog" class="mdl-dialog">
+      <h3 class="mdl-dialog__title">MDL Dialog</h3>
+      <div class="mdl-dialog__content">
+        <p>
+          This is an example of the Material Design Lite dialog component.
+          Please use responsibly.
+        </p>
+      </div>
+      <div class="mdl-dialog__actions">
+        <button type="button" class="mdl-button">Close</button>
+        <button type="button" class="mdl-button" disabled>Disabled action</button>
+      </div>
+    </dialog>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
       <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
@@ -40,20 +53,14 @@
                   </nav>
                 </div>
                 <main class="mdl-layout__content" style="margin-left: 20%;">
-                  <div class="page-content"><h1>Your content goes here</h1>
-                    <dialog id="dialog" class="mdl-dialog">
-                        <h3 class="mdl-dialog__title">MDL Dialog</h3>
-                        <div class="mdl-dialog__content">
-                          <p>
-                            This is an example of the Material Design Lite dialog component.
-                            Please use responsibly.
-                          </p>
-                        </div>
-                        <div class="mdl-dialog__actions">
-                          <button type="button" class="mdl-button">Close</button>
-                          <button type="button" class="mdl-button" disabled>Disabled action</button>
-                        </div>
-                      </dialog>
+                  <div class="page-content" style="height: 100%; position: relative;">
+                    
+                    <div class = "bg" style="height: 100%;">
+                      <h1>Content goes here</h1>
+                      <h4>Change the watermark image in base.css > .bg </h4>
+                    </div>
+
+                    
                       <script>
                         'use strict';
                         var dialogButton = document.querySelector('#login');
