@@ -1,4 +1,5 @@
 $(document).ready(function (){
+    window.location.replace("index.html?#");
     var dialog = $("#dialog");
     var dialogDelivery = $("#dialog-delivery");
     var dialogNoDelivery = $("#dialog-no-delivery");
@@ -65,6 +66,44 @@ $(document).ready(function (){
             }
         });
     });
+
+    $("#login-btn").on("click",function(){
+        $.ajax({
+            type:"POST",
+            url:"includes/login.php",
+            data: { email: $("#email").val(),
+                    pwd: $("#password").val()
+                },
+            success: function (data){
+                var res = data.split(",");
+                if(res[0] == "admin")
+                {
+                    //redir to admin
+                    //alert("adminpanel.php?userid="+res[1]+"&username="+res[2]);
+                    //window.location = "adminpanel.php?userid="+res[1]+"&username="+res[2];
+                    window.location.replace("adminpanel.php?userid="+res[1]+"&username="+res[2]);
+                }
+                else if(res[0] == "user")
+                {
+                    //window.location.replace("adminpanel.php?userid=user&username="+res[2]);
+                }
+                else if(res[0] == "error")
+                {
+                    alert(data);
+                    //error msg
+                }
+                // console.log(data);
+                // $(".progress").css("visibility","hidden");
+                // $(".mdl-layout__container").addClass("blur-filter");
+                // if(data == "1") $("#dialog-email").fadeIn(100);
+                // else if(data == "2") $("#dialog-phone").fadeIn(100);
+                // else if(data == "0") $("#dialog-registered").fadeIn(100);
+            },
+            error: function (data){
+                alert(data.message);
+            }
+        });
+    })
 
     
 });
