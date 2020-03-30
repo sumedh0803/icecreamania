@@ -29,7 +29,8 @@ $(document).ready(function(){
             $("#eLname").text("Last name can't by empty");
             $("#eLname").css("visibility","visible");
             $(this).addClass("invalid-field"); 
-            $(this).removeClass("valid-field");   
+            $(this).removeClass("valid-field");  
+            enableButton(flag); 
         }
         else
         {
@@ -48,7 +49,8 @@ $(document).ready(function(){
             $("#eAddr1").text("Address can't by empty");
             $("#eAddr1").css("visibility","visible");
             $(this).addClass("invalid-field"); 
-            $(this).removeClass("valid-field");   
+            $(this).removeClass("valid-field"); 
+            enableButton(flag);  
         }
         else
         {
@@ -71,7 +73,8 @@ $(document).ready(function(){
             $("#ePhone").text("Phone number can't by empty");
             $("#ePhone").css("visibility","visible");
             $(this).addClass("invalid-field"); 
-            $(this).removeClass("valid-field");   
+            $(this).removeClass("valid-field"); 
+            enableButton(flag);  
         }
         else
         {
@@ -83,7 +86,8 @@ $(document).ready(function(){
                 $("#ePhone").text("Phone number should have 10 digits");
                 $("#ePhone").css("visibility","visible");
                 $(this).addClass("invalid-field"); 
-                $(this).removeClass("valid-field");   
+                $(this).removeClass("valid-field"); 
+                enableButton(flag);  
             }
             else
             {
@@ -105,6 +109,7 @@ $(document).ready(function(){
             $("#eCity").css("visibility","visible");
             $(this).addClass("invalid-field"); 
             $(this).removeClass("valid-field"); 
+            enableButton(flag);
               
         }
         else
@@ -125,6 +130,7 @@ $(document).ready(function(){
             $("#ePin").css("visibility","visible");
             $(this).addClass("invalid-field"); 
             $(this).removeClass("valid-field");   
+            enableButton(flag);
         }
         else
         {
@@ -134,7 +140,8 @@ $(document).ready(function(){
                 $("#ePin").text("Pin code should have 5 digits");
                 $("#ePin").css("visibility","visible");
                 $(this).addClass("invalid-field"); 
-                $(this).removeClass("valid-field");   
+                $(this).removeClass("valid-field"); 
+                enableButton(flag);  
             }
             else
             {
@@ -156,7 +163,8 @@ $(document).ready(function(){
             $("#eEmail").text("Email can't by empty");
             $("#eEmail").css("visibility","visible");
             $(this).addClass("invalid-field"); 
-            $(this).removeClass("valid-field");   
+            $(this).removeClass("valid-field");  
+            enableButton(flag); 
         }
         else
         {
@@ -167,6 +175,7 @@ $(document).ready(function(){
                 $("#eEmail").css("visibility","visible");
                 $(this).addClass("invalid-field"); 
                 $(this).removeClass("valid-field"); 
+                enableButton(flag);
             }
             else
             {
@@ -241,6 +250,7 @@ $(document).ready(function(){
             $("#ePwd").css("visibility","visible");
             $(this).addClass("invalid-field"); 
             $(this).removeClass("valid-field"); 
+            enableButton(flag);
 
         } 
     });
@@ -252,6 +262,7 @@ $(document).ready(function(){
             $("#eEmailC").css("visibility","visible");
             $(this).addClass("invalid-field"); 
             $(this).removeClass("valid-field");
+            enableButton(flag);
         }
         else
         {
@@ -262,6 +273,7 @@ $(document).ready(function(){
                 $("#eEmailC").css("visibility","visible");
                 $(this).addClass("invalid-field"); 
                 $(this).removeClass("valid-field");
+                enableButton(flag);
             }
             else
             {
@@ -277,23 +289,26 @@ $(document).ready(function(){
         e.preventDefault();
     });
     $("#pwd-conf").on("blur",function(){
-        if($(this).val == "")
+        if($(this).val() == "")
         {
             flag[9] = false;   
             $("#ePwdC").text("Confirmation Password can't by empty");
             $("#ePwdC").css("visibility","visible");
             $(this).addClass("invalid-field"); 
             $(this).removeClass("valid-field");
+            enableButton(flag);
         }
         else
         {
-            if($(this).val != $("#pwd").val)
+            if($(this).val() != $("#pwd").val())
             {
-                flag[9] = false;   
+                flag[9] = false;  
+
                 $("#ePwdC").text("Passwords don't match");
                 $("#ePwdC").css("visibility","visible");
                 $(this).addClass("invalid-field"); 
                 $(this).removeClass("valid-field");
+                enableButton(flag);
             }
             else
             {
