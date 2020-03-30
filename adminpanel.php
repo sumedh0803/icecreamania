@@ -2,10 +2,10 @@
 
 session_start();
 $_SESSION["usertype"] = "admin";
-// $_SESSION["userid"] = $_REQUEST['userid'];
-// $_SESSION["username"] = $_REQUEST['username'];
-$_SESSION["userid"] = 123456;
-$_SESSION["username"] = "Sumedh";
+$_SESSION["userid"] = $_REQUEST['userid'];
+$_SESSION["username"] = $_REQUEST['username'];
+// $_SESSION["userid"] = 123456;
+// $_SESSION["username"] = "Sumedh";
 
 ?>
 
@@ -39,7 +39,7 @@ $_SESSION["username"] = "Sumedh";
           <!-- Navigation. We hide it in small screens. -->
           <nav class="mdl-navigation mdl-layout--large-screen-only">
               <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "login"></button>
-              <button class="mdl-button mdl-js-button gotu top-bar-btn">Sign Out</button>
+              <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "signout">Sign Out</button>
           </nav>
         </div>
       </header>

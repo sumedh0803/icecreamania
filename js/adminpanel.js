@@ -3,7 +3,21 @@ $(document).ready(function(){
     {  
         var redir = $(this).attr("redir");
         $(".container").load(redir);
-    }) 
+    });
+
+    $("#signout").on("click",function(){
+        $.ajax({
+            type:"POST",
+            url:"includes/signout.php",
+            success: function (data){
+                console.log(data);
+                window.location.replace("index.html");
+            },
+            error: function (data){
+                alert(data.message);
+            }
+        });
+    })
 
     // Ajax call for adding new products
     $(".productbtn").on("click",function(e){
@@ -33,7 +47,7 @@ $(document).ready(function(){
                 alert(data.message);
             }
         });
-    })
+    });
 
     // Ajax call for adding coupons
     $(".couponbtn").on("click",function(e){
@@ -62,7 +76,7 @@ $(document).ready(function(){
                 alert(data.message);
             }
         });
-    })
+    });
 
 
 
