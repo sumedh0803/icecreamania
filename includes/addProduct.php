@@ -6,16 +6,32 @@ $invqty = $_REQUEST['invqty'];
 $category = $_REQUEST['category'];
 $rate = $_REQUEST['rate'];
 $description = $_REQUEST['description'];
+$file = $_FILES['file'];
 
-// echo $itemname, $invqty, $category, $rate, $description;
+$target_dir = "../productImages/";
+$target_file = $target_dir . basename($_FILES["file"]["name"]);
 
+//echo $itemname, $invqty, $category, $rate, $description,$_FILES["file"]["name"];
 
-$sql = "INSERT INTO inventory(itemname,category,description,invqty,rate) VALUES('$itemname', '$category', '$description', $invqty, $rate)";
-$result = mysqli_query($conn, $sql);
+$uploadOk = 1;
+//$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+//Check if image file is a actual image or fake image
+$check = getimagesize($_FILES["file"]["tmp_name"]);
+if($check !== false) {
+    move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+    $sql = "INSERT INTO inventory(itemname,category,description,invqty,rate,imagepath) VALUES('$itemname', '$category', '$description', $invqty, $rate,'$target_file')";
+    $result = mysqli_query($conn, $sql);
 
-if(!$result)
-    echo mysqli_error($conn);
+    if(!$result)
+        echo "PHP: ".mysqli_error($conn);
+    else
+        echo "1";
+}
 else
-    echo "1";
+{
+    echo "0";
+    $uploadOk = 0;
+}
+
 
 ?>

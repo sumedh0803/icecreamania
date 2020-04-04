@@ -4,8 +4,6 @@ session_start();
 $_SESSION["usertype"] = "admin";
 $_SESSION["userid"] = $_REQUEST['userid'];
 $_SESSION["username"] = $_REQUEST['username'];
-// $_SESSION["userid"] = 123456;
-// $_SESSION["username"] = "Sumedh";
 
 ?>
 
@@ -47,14 +45,14 @@ $_SESSION["username"] = $_REQUEST['username'];
       <main class="mdl-layout__content">
         <div class="main1 bg">
           <div class = "admintitle gotu">
-            <div class = "adminname">Welcome, <?php echo $_SESSION["username"];?></div> <span class = "adminid">Admin ID: #<?php echo $_SESSION["userid"]; ?></span>
+            <div class = "adminname">Welcome, Admin - <?php echo $_SESSION["username"];?></div> <span class = "adminid">Admin ID: #<?php echo $_SESSION["userid"]; ?></span>
             
           </div>
             <div class="main1-left">
                 <div class="main1-left-top">
                     <div id="dialog" class = "gotu">
                           <div class = "title">Add Products:</div>
-                            <form class="productsform">
+                            <form class="productsform" enctype="multipart/form-data" method = "post">
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
                                     <input class="mdl-textfield__input" name = "itemname" type="text" id="itemname">
                                     <label class="mdl-textfield__label" for="itemname" style="font-size:13px;">Product Name</label>
@@ -82,9 +80,16 @@ $_SESSION["username"] = $_REQUEST['username'];
                                     <input class="mdl-textfield__input" name = "rate" type="number" id="rate">
                                     <label class="mdl-textfield__label" for="rate" style="font-size:13px;">Rate</label>
                                   </div>
-                                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100%;">
+                                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 49%;">
                                     <textarea class="mdl-textfield__input" name = "description" type="text" rows= "3" id="description"></textarea>
                                     <label class="mdl-textfield__label" for="description" style="font-size:13px;">Product Description</label>
+                                  </div>
+                                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--file--floating-label mdl-textfield--floating-labe" style="width: 48%;">
+                                    <input class="mdl-textfield__input" type="text" id="uploadFile" style="float:left;width:90%;"/>
+                                    <label class="mdl-textfield__label" for="uploadfile" style="font-size:13px;">Product Image</label>
+                                    <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--file" style="bottom:0%;float:right">
+                                      <i class="material-icons">attach_file</i><input type="file" id="uploadBtn">
+                                    </div>
                                   </div>
                                   <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored productbtn" style="width: 100%; margin-top: 10px;">
                                     ADD TO INVENTORY

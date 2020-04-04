@@ -5,6 +5,8 @@ $(document).ready(function(){
         $(".container").load(redir);
     });
 
+    
+
     $("#signout").on("click",function(){
         $.ajax({
             type:"POST",
@@ -19,28 +21,45 @@ $(document).ready(function(){
         });
     })
 
+    document.getElementById("uploadBtn").onchange = function () {
+        document.getElementById("uploadFile").value = this.files[0].name;
+        $("[for=uploadfile]").text(" ");
+    };
+
     // Ajax call for adding new products
     $(".productbtn").on("click",function(e){
         e.preventDefault();
+        var file_data = $('#uploadBtn').prop('files')[0];
+        var formData = new FormData();
+        formData.append('file', file_data);
+        formData.append('itemname', $("#itemname").val());
+        formData.append('category', $("#category").val());
+        formData.append('description', $("#description").val());
+        formData.append('invqty', $("#invqty").val());
+        formData.append('rate', $("#rate").val());
         $.ajax({
             type:"POST",
             url:"includes/addProduct.php",
-            data: { itemname: $("#itemname").val(),
-                    category: $("#category").val(),
-                    description: $("#description").val(),
-                    invqty: $("#invqty").val(),
-                    rate: $("#rate").val()},
+            cache: false,
+        contentType: false,
+        processData: false,
+            data: formData,
             success: function(data){
                 if(data == "1")
                 {
-
                     $(".productbtn").html("Product successfully added to inventory");
                     setTimeout(function(){
                         //fade back
                         $(".productbtn").html("Add to inventory");
                         //$(e).html(text);
                         $(".productsform").trigger('reset');
+                        $("[for=uploadfile]").text("Product Image");
+                        $(".productsform").children().removeClass("is-dirty");
                     }, 1000);
+                }
+                else
+                {
+                    console.log(data)
                 }
             },
             error: function (data){
@@ -48,6 +67,8 @@ $(document).ready(function(){
             }
         });
     });
+
+
 
     // Ajax call for adding coupons
     $(".couponbtn").on("click",function(e){
@@ -77,6 +98,8 @@ $(document).ready(function(){
             }
         });
     });
+
+
 
 
 
