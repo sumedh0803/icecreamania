@@ -75,6 +75,10 @@ a
     position: absolute;
     z-index: 0;
 }
+.scrollable{
+    overflow-y: auto;
+    overflow-x: hidden;
+}
 #searchBar {
     width : 50% ;
     margin-left: 5%;
