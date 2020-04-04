@@ -3,17 +3,6 @@
   require_once "dbcontroller.php";
   $dbcontroller = new DBController();
   $dbcontroller -> connectDb();
-  if(isset($_SESSION["userId"])){
-    $getCartDetails = $dbcontroller -> runQuery("Select cart.itemid,qty,itemname,rate,imagepath from cart inner join inventory on cart.itemid = inventory.itemid where uid = '".$_SESSION["userId"]."'");
-    $cartList = array();
-    while($row =  mysqli_fetch_assoc($getCartDetails)){
-      $cartItem = array($row["cart.itemid"] => array('itemname' => $row["itemname"], 'rate' => $row["rate"], 'imagepath' => $productDetailsResult["imagepath"], 'quantity' => $row["qty"]));
-      $cartList += $cartItem;
-    }
-    if(!empty($cartList) && count($cartList) > 0){
-      $_SESSION["cartItemsList"] = empty($cartList);
-    }
-  }
 ?>
 <!DOCTYPE html>
 <html lang="en">

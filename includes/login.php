@@ -1,10 +1,12 @@
 <?php 
-include("../conn.php");
+session_start();
+require_once "dbcontroller.php";
+$dbcontroller = new DBController();
+$dbcontroller -> connectDb();
 $email = $_REQUEST['email'];
 $pwd = $_REQUEST['pwd'];
 
-$sql = "SELECT * FROM admin WHERE email = '$email' and pwd = '$pwd'";
-$result = mysqli_query($conn, $sql);
+$result = $dbcontroller -> runQuery("SELECT * FROM admin WHERE email = '$email' and pwd = '$pwd'");
 $rowcount = mysqli_num_rows($result);
 if($rowcount > 0)
 {
@@ -16,13 +18,26 @@ if($rowcount > 0)
 else
 {
     $pwdHash = md5($pwd);
-    $sql = "SELECT * FROM user WHERE email = '$email' and password = '$pwdHash'";
-    $result = mysqli_query($conn, $sql);
+    $result = $dbcontroller -> runQuery("SELECT * FROM user WHERE email = '$email' and password = '$pwdHash'");
     $rowcount = mysqli_num_rows($result);
     if($rowcount > 0)
     {
         //user exists
         $row = mysqli_fetch_assoc($result);
+        
+        $_SESSION["userId"] = $row['uid'];
+        if(isset($_SESSION["userId"])){
+            $getCartDetails = $dbcontroller -> runQuery("Select inventory.itemid as itemId,qty,itemname,rate,imagepath from cart,inventory where inventory.itemid = cart.itemid and uid = '".$_SESSION["userId"]."'");
+            $cartList = array();
+            while($row =  mysqli_fetch_assoc($getCartDetails)){
+              $cartItem = array($row["itemId"] => array('itemname' => $row["itemname"], 'rate' => $row["rate"], 'imagepath' => $row["imagepath"], 'quantity' => $row["qty"]));
+              $cartList += $cartItem;
+            }
+            if(!empty($cartList) && count($cartList) > 0){
+              $_SESSION["cartItemsList"] = $cartList;
+            }
+        }
+
         $data = array();
         array_push($data,"user",$row['uid'],$row['fname']);
         echo implode(",",$data);
