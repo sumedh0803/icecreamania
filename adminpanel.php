@@ -60,16 +60,16 @@ $_SESSION["username"] = $_REQUEST['username'];
                                   </div>
                                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
                                     <select class="mdl-textfield__input" id="category" name="category">
-                                        <option></option>
-                                        <option value="3 Pint">3 Pint</option>
-                                        <option value="Banana Split">Banana Split</option>
-                                        <option value="Bar">Bar</option>
-                                        <option value="Bucket (5 Quarts)">Bucket (5 Quarts)</option>
-                                        <option value="Cone">Cone</option>
-                                        <option value="Popsicle">Popsicle</option>
+                                        <option></option>               
+                                        <option value="Bucket (1 Quart)">Bucket (1 Quart)</option>
+                                        <option value="Cakes">Cakes</option>
+                                        <option value="Cappuccino Blast">Cappuccino Blast</option>
+                                        <option value="Floats and Freezes">Floats and Freezes</option>
+                                        <option value="Milk Shakes">Milk Shakes</option>
                                         <option value="Scoops">Scoops</option>
-                                        <option value="Soft-Serve">Soft-Serve</option>
+                                        <option value="Smoothies">Smoothies</option>
                                         <option value="Sundae">Sundae</option>
+                                        <option value="Warm Desserts">Warm Desserts</option>
                                     </select>
                                     <label class="mdl-textfield__label" for="category" style="font-size:13px;">Category</label>
                                   </div>
