@@ -79,13 +79,13 @@ $(document).ready(function (){
                 if(res[0] == "admin")
                 {
                     //redir to admin
-                    alert("adminpanel.php?userid="+res[1]+"&username="+res[2]);
-                    //window.location = "adminpanel.php?userid="+res[1]+"&username="+res[2];
-                    //window.location.replace("adminpanel.php?userid="+res[1]+"&username="+res[2]);
+                    //alert("adminpanel.php?userid="+res[1]+"&username="+res[2]);
+                    window.location = "menu.html?userType=admin&userid="+res[1]+"&username="+res[2];
+                    //window.location.replace("menu.html?userid="+res[1]+"&username="+res[2]);
                 }
                 else if(res[0] == "user")
                 {
-                    //window.location.replace("adminpanel.php?userid=user&username="+res[2]);
+                    //window.location.replace("adminpanel.php?userType=user&userid=user&username="+res[2]);
                 }
                 else if(res[0] == "error")
                 {

@@ -31,8 +31,14 @@
         <div class="mdl-layout__header-row">
           <!-- Title -->
           <span class="mdl-layout-title">Ice Creamania!</span>
-          <!-- Add spacer, to align navigation to the right -->
-          <div class="mdl-layout-spacer"></div>
+          <!-- Add spacer, to align navigation to the right (add spacer if no search bar)
+          <div class="mdl-layout-spacer"></div> -->
+          <div class="mdh-expandable-search mdl-cell--hide-phone">
+            <i class="material-icons">search</i>
+            <form action="#">
+              <input type="text" placeholder="Search" size="1">
+            </form>
+          </div>
           <!-- Navigation. We hide it in small screens. -->
           <nav class="mdl-navigation mdl-layout--large-screen-only">
               <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "login" >Login</button>
