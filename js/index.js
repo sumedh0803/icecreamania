@@ -66,6 +66,39 @@ $(document).ready(function (){
         });
     });
 
+    $("#login-btn").on("click",function(){
+        $.ajax({
+            type:"POST",
+            url:"includes/login.php",
+            data: { email: $("#email").val(),
+                    pwd: $("#password").val()
+                },
+            success: function (data){
+                console.log(data);  
+                var res = data.split(",");
+                if(res[0] == "admin")
+                {
+                    //redir to admin
+                    alert("adminpanel.php?userid="+res[1]+"&username="+res[2]);
+                    //window.location = "adminpanel.php?userid="+res[1]+"&username="+res[2];
+                    //window.location.replace("adminpanel.php?userid="+res[1]+"&username="+res[2]);
+                }
+                else if(res[0] == "user")
+                {
+                    //window.location.replace("adminpanel.php?userid=user&username="+res[2]);
+                }
+                else if(res[0] == "error")
+                {
+                    alert(data);
+                    //error msg
+                }
+            },
+            error: function (data){
+                alert(data.message);
+            }
+        });
+    })
+
     
 });
 

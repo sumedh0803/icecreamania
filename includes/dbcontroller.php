@@ -1,9 +1,9 @@
 <?php
     class DBController{
-        private $hostName = "localhost";
-        private $userName = "root";
-        private $password = "root";
-        private $database = "tk0hev3zwf";
+        private $hostName = "remotemysql.com:3306";
+        private $userName = "tK0HEv3ZWF";
+        private $password = "t4qEtDKTnP";
+        private $database = "tK0HEv3ZWF";
         private $conn;
 
         public function connectDb(){
