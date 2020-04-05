@@ -54,29 +54,19 @@
 
 .main1-left
 {
-   width: 28%;
-   height: 100%;
-    float: left;
+   width: 50%;
+   height: 90%;
+   float: left;
+   margin-left: 3%;
   
-}
-
-.main1-left-top
-{
-    height: auto;
-    display: flex;
-    margin-bottom: 2% ;
-}
-
-.main1-left-bottom
-{
-    height: auto;
-    display: flex;
 }
 
 .main1-right
 {
-    overflow-y: scroll;
     float: right;
+    height: 90%;
+    width: 40%;
+    margin-right: 6%;
 }
 
 .mdl-textfield
@@ -110,6 +100,41 @@
     .mdl-textfield--file .mdl-button--file {
       right: 0;
     }
+
+.productimage {
+    float: right;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-right: 20px;
+    width: 150px;
+    height: 150px;
+    position: relative;
+    text-align: center;
+}
+
+#product-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+}
+
+#product-preview {
+    width: 150px;
+    height: 150px;
+    filter: blur(2px);
+  -webkit-filter: blur(2px);
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bolder;
+    font-size: 20px;
+    color: 
+  } 
 
  
   

@@ -36,7 +36,6 @@ $_SESSION["username"] = $_REQUEST['username'];
           <div class="mdl-layout-spacer"></div>
           <!-- Navigation. We hide it in small screens. -->
           <nav class="mdl-navigation mdl-layout--large-screen-only">
-              <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "login"></button>
               <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "signout">Sign Out</button>
           </nav>
         </div>
@@ -45,11 +44,9 @@ $_SESSION["username"] = $_REQUEST['username'];
       <main class="mdl-layout__content">
         <div class="main1 bg">
           <div class = "admintitle gotu">
-            <div class = "adminname">Welcome, Admin - <?php echo $_SESSION["username"];?></div> <span class = "adminid">Admin ID: #<?php echo $_SESSION["userid"]; ?></span>
-            
-          </div>
+            <div class = "adminname">Welcome, Admin - <?php echo $_SESSION["username"];?></div> <span class = "adminid">Admin ID: #<?php echo $_SESSION["userid"]; ?></span> 
+            </div>
             <div class="main1-left">
-                <div class="main1-left-top">
                     <div id="dialog" class = "gotu">
                           <div class = "title">Add Products:</div>
                             <form class="productsform" enctype="multipart/form-data" method = "post">
@@ -80,11 +77,15 @@ $_SESSION["username"] = $_REQUEST['username'];
                                     <input class="mdl-textfield__input" name = "rate" type="number" id="rate">
                                     <label class="mdl-textfield__label" for="rate" style="font-size:13px;">Rate</label>
                                   </div>
-                                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 49%;">
+                                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 60%;">
                                     <textarea class="mdl-textfield__input" name = "description" type="text" rows= "3" id="description"></textarea>
                                     <label class="mdl-textfield__label" for="description" style="font-size:13px;">Product Description</label>
                                   </div>
-                                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--file--floating-label mdl-textfield--floating-labe" style="width: 48%;">
+                                  <div class="productimage">
+                                      <img id="product-preview" src="./images/product-preview.png" alt="Product-Preview">
+                                      <div class="centered">Preview</div>
+                                  </div>
+                                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--file--floating-label mdl-textfield--floating-label" style="width: 67%;">
                                     <input class="mdl-textfield__input" type="text" id="uploadFile" style="float:left;width:90%;"/>
                                     <label class="mdl-textfield__label" for="uploadfile" style="font-size:13px;">Product Image</label>
                                     <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--file" style="bottom:0%;float:right">
@@ -94,13 +95,12 @@ $_SESSION["username"] = $_REQUEST['username'];
                                   <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored productbtn" style="width: 100%; margin-top: 10px;">
                                     ADD TO INVENTORY
                                   </button>
-                                </form>
-                          
-                    </div>
+                                </form>        
                 </div>
+            </div>
                 
 
-          <div class="main1-left-bottom">
+          <div class="main1-right">
             <div id="dialog" class = "gotu">
               <div class = "title">Add Coupons:</div>
                 <form class="productsform1" method="POST">
@@ -133,9 +133,7 @@ $_SESSION["username"] = $_REQUEST['username'];
         </div>
           </div>
             </div>
-            <div class="main1-right"></div>
-        </div>
-  </div>
+  
       </main>
       </div>
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
