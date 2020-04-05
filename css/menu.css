@@ -1,0 +1,19 @@
+.main-card
+{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  height: 100%;
+  background-color: rgb(252, 250, 250);
+  border-radius: 5px;
+}
+
+.bg-gradient
+{
+    background-color: rgba(130, 220, 255, 0.459);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: 0;
+}
