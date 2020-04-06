@@ -46,6 +46,7 @@ $_SESSION["username"] = $_REQUEST['username'];
           <div class = "admintitle gotu">
             <div class = "adminname">Welcome, Admin - <?php echo $_SESSION["username"];?></div> <span class = "adminid">Admin ID: #<?php echo $_SESSION["userid"]; ?></span> 
             </div>
+            
             <div class="main1-left">
                     <div id="dialog" class = "gotu">
                           <div class = "title">Add Products:</div>
@@ -110,39 +111,82 @@ $_SESSION["username"] = $_REQUEST['username'];
             </div>
                 
 
-          <div class="main1-right">
-            <div id="dialog" class = "gotu">
-              <div class = "title">Add Coupons:</div>
-                <form class="productsform1" method="POST">
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
-                        <input class="mdl-textfield__input" name = "cname" type="text" id="cname">
-                        <label class="mdl-textfield__label" for="cname" style="font-size:13px;">Coupon Name</label>
-                      </div>
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 25%;margin-left: 5px;">
-                        <input class="mdl-textfield__input" name = "amtoff" type="number" id="amtoff">
-                        <label class="mdl-textfield__label" for="amtoff" style="font-size:13px;">Amount Off</label>
-                      </div>
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 48%; margin-left: 5px;">
-                        <input class="mdl-textfield__input date" name = "dateadded" type="date" id="dateadded">
-                        <label class="mdl-textfield__label" for="dateadded" style="font-size:13px;">Date Added</label>
-                      </div>
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 48%; margin-left: 5px;">
-                        <input class="mdl-textfield__input date" name = "duedate" type="date" id="duedate">
-                        <label class="mdl-textfield__label" for="duedate" style="font-size:13px;">Due Date</label>
-                      </div>
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 25%;margin-left: 5px;">
-                        <input class="mdl-textfield__input" name = "lmt" type="number" id="lmt">
-                        <label class="mdl-textfield__label" for="lmt" style="font-size:13px;">Limit</label>
-                      </div>
-                      
-                      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored couponbtn" style="width: 100%; margin-top: 10px;">
-                        ADD COUPON
-                      </button>
-                    </form>
-              
-        </div>
+            <div class="main1-right">
+              <div id="dialog" class = "gotu">
+                <div class = "title">Add Coupons:</div>
+                  <form class="productsform1" method="POST">
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
+                          <input class="mdl-textfield__input" name = "cname" type="text" id="cname">
+                          <label class="mdl-textfield__label" for="cname" style="font-size:13px;">Coupon Name</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 25%;margin-left: 5px;">
+                          <input class="mdl-textfield__input" name = "amtoff" type="number" id="amtoff">
+                          <label class="mdl-textfield__label" for="amtoff" style="font-size:13px;">Amount Off</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 48%; margin-left: 5px;">
+                          <input class="mdl-textfield__input date" name = "dateadded" type="date" id="dateadded">
+                          <label class="mdl-textfield__label" for="dateadded" style="font-size:13px;">Date Added</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 48%; margin-left: 5px;">
+                          <input class="mdl-textfield__input date" name = "duedate" type="date" id="duedate">
+                          <label class="mdl-textfield__label" for="duedate" style="font-size:13px;">Due Date</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 25%;margin-left: 5px;">
+                          <input class="mdl-textfield__input" name = "lmt" type="number" id="lmt">
+                          <label class="mdl-textfield__label" for="lmt" style="font-size:13px;">Limit</label>
+                        </div>
+                        
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored couponbtn" style="width: 100%; margin-top: 10px;">
+                          ADD COUPON
+                        </button>
+                      </form>
+
+
+                
+              </div>
+
+
+              <div id="dialog" class = "gotu">
+                <div class = "title">Add Extras:</div>
+                  <form class="productsform2" method="POST">
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 30%;">
+                          <input class="mdl-textfield__input" name = "eid" type="text" id="eid">
+                          <label class="mdl-textfield__label" for="eid" style="font-size:13px;">Extra ID</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 68%;margin-left: 5px;">
+                          <input class="mdl-textfield__input" name = "ename" type="text" id="ename">
+                          <label class="mdl-textfield__label" for="ename" style="font-size:13px;">Extra Name</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
+                                    <select class="mdl-textfield__input" id="category1" name="category1">
+                                        <option></option>               
+                                        <option value="Bucket (1 Quart)">Bucket (1 Quart)</option>
+                                        <option value="Cakes">Cakes</option>
+                                        <option value="Cappuccino Blast">Cappuccino Blast</option>
+                                        <option value="Floats and Freezes">Floats and Freezes</option>
+                                        <option value="Milk Shakes">Milk Shakes</option>
+                                        <option value="Scoops">Scoops</option>
+                                        <option value="Smoothies">Smoothies</option>
+                                        <option value="Sundae">Sundae</option>
+                                        <option value="Warm Desserts">Warm Desserts</option>
+                                    </select>
+                                    <label class="mdl-textfield__label" for="category1" style="font-size:13px;">Category</label>
+                                  </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 25%;margin-left: 5px;">
+                          <input class="mdl-textfield__input" name = "rate1" type="number" id="rate1">
+                          <label class="mdl-textfield__label" for="rate1" style="font-size:13px;">Rate</label>
+                        </div>
+                        
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored extrabtn" style="width: 100%; margin-top: 10px;">
+                          ADD EXTRA
+                        </button>
+                      </form> 
+              </div>
+           </div>
           </div>
-            </div>
+
+          
+        </div>
   
       </main>
       </div>

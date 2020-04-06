@@ -6,7 +6,6 @@ $(document).ready(function(){
     });
 
     
-
     $("#signout").on("click",function(){
         $.ajax({
             type:"POST",
@@ -44,6 +43,8 @@ $(document).ready(function(){
       $("#uploadBtn").change(function() {
         readURL(this);
       });
+
+      spl = 0;
 
       $("#special").change(
         function(){
@@ -90,7 +91,8 @@ $(document).ready(function(){
                         $("#product-image").remove();
                         $(".productimage").prepend('<img id="product-preview" src="./images/product-preview.png" alt="Product-Preview">');
                         $(".productimage").prepend('<div class="centered">Preview</div>');
-                        $('.mdl-checkbox.is-checked .mdl-checkbox__tick-outline').css("background", "none");
+                        document.querySelector('.mdl-js-checkbox').MaterialCheckbox.uncheck();
+                        spl = 0;
                     }, 2000);
                 }
                 else
@@ -105,9 +107,9 @@ $(document).ready(function(){
     });
 
 
-
     // Ajax call for adding coupons
     $(".couponbtn").on("click",function(e){
+        
         e.preventDefault();
         $.ajax({
             type:"POST",
@@ -125,6 +127,42 @@ $(document).ready(function(){
                         //fade back
                         $(".couponbtn").html("Add Coupon");
                         $(".productsform1").trigger('reset');
+                        $(".mdl-textfield").removeClass("is-dirty"); 
+                    }, 2000);
+                }
+            },
+            error: function (data){
+                alert(data.message);
+            }
+        });
+    });
+
+
+    
+
+    //Ajax call for adding extras
+    $(".extrabtn").on("click",function(e){
+        console.log($("#eid").val());
+        console.log($("#ename").val());
+        console.log($("#category1").val());
+        console.log($("#price").val());
+        e.preventDefault();
+        $.ajax({
+            type:"POST",
+            url:"includes/addExtra.php",
+            data: { eid: $("#eid").val(),
+                    ename: $("#ename").val(),
+                    category1: $("#category1").val(),
+                    rate: $("#rate1").val()},
+            success: function(data){
+                console.log(data);
+                if(data == "1") 
+                {
+                    $(".extrabtn").html("Extra Item added successfully");
+                    setTimeout(function(){
+                        //fade back
+                        $(".extrabtn").html("Add Extra");
+                        $(".productsform2").trigger('reset');
                         $(".mdl-textfield").removeClass("is-dirty"); 
                     }, 2000);
                 }

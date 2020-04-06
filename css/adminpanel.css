@@ -10,6 +10,7 @@
     -webkit-box-shadow: 3px 7px 23px 1px rgba(117,117,117,1);
     -moz-box-shadow: 3px 7px 23px 1px rgba(117,117,117,1);
     box-shadow: 3px 7px 23px 1px rgba(117,117,117,1);
+    margin-bottom: 20px;
 }
 
 .title
@@ -64,7 +65,7 @@
 .main1-right
 {
     float: right;
-    height: 90%;
+    height: 50%;
     width: 40%;
     margin-right: 6%;
 }
