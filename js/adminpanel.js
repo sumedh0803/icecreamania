@@ -59,6 +59,7 @@ $(document).ready(function(){
 
     // Ajax call for adding new products
     $(".productbtn").on("click",function(e){
+        $(".progress-inventory").css("visibility","visible");
         e.preventDefault();
         var file_data = $('#uploadBtn').prop('files')[0];
         var formData = new FormData();
@@ -84,7 +85,7 @@ $(document).ready(function(){
                     setTimeout(function(){
                         //fade back
                         $(".productbtn").html("Add to inventory");
-                        //$(e).html(text);
+                        $(".progress-inventory").css("visibility","hidden");
                         $(".productsform").trigger('reset');
                         $("[for=uploadfile]").text("Product Image");
                         $(".productsform").children().removeClass("is-dirty");
@@ -109,7 +110,7 @@ $(document).ready(function(){
 
     // Ajax call for adding coupons
     $(".couponbtn").on("click",function(e){
-        
+        $(".progress-coupon").css("visibility","visible");
         e.preventDefault();
         $.ajax({
             type:"POST",
@@ -125,6 +126,7 @@ $(document).ready(function(){
                     $(".couponbtn").html("Coupon added successfully");
                     setTimeout(function(){
                         //fade back
+                        $(".progress-coupon").css("visibility","hidden");
                         $(".couponbtn").html("Add Coupon");
                         $(".productsform1").trigger('reset');
                         $(".mdl-textfield").removeClass("is-dirty"); 
@@ -142,10 +144,7 @@ $(document).ready(function(){
 
     //Ajax call for adding extras
     $(".extrabtn").on("click",function(e){
-        console.log($("#eid").val());
-        console.log($("#ename").val());
-        console.log($("#category1").val());
-        console.log($("#price").val());
+        $(".progress-extra").css("visibility","visible");
         e.preventDefault();
         $.ajax({
             type:"POST",
@@ -161,6 +160,7 @@ $(document).ready(function(){
                     $(".extrabtn").html("Extra Item added successfully");
                     setTimeout(function(){
                         //fade back
+                        $(".progress-extra").css("visibility","hidden");
                         $(".extrabtn").html("Add Extra");
                         $(".productsform2").trigger('reset');
                         $(".mdl-textfield").removeClass("is-dirty"); 

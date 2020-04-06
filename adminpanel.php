@@ -106,6 +106,7 @@ $_SESSION["username"] = $_REQUEST['username'];
                                   <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored productbtn" style="width: 100%; margin-top: 10px;">
                                     ADD TO INVENTORY
                                   </button>
+                                  <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate mdl-progress-accent progress-inventory" style="width: 100%;visibility: hidden;"></div>
                                 </form>        
                 </div>
             </div>
@@ -139,6 +140,7 @@ $_SESSION["username"] = $_REQUEST['username'];
                         <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored couponbtn" style="width: 100%; margin-top: 10px;">
                           ADD COUPON
                         </button>
+                        <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate mdl-progress-accent progress-coupon" style="width: 100%;visibility: hidden;"></div>
                       </form>
 
 
@@ -180,6 +182,7 @@ $_SESSION["username"] = $_REQUEST['username'];
                         <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored extrabtn" style="width: 100%; margin-top: 10px;">
                           ADD EXTRA
                         </button>
+                        <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate mdl-progress-accent progress-extra" style="width: 100%;visibility: hidden;"></div>
                       </form> 
               </div>
            </div>
