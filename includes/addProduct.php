@@ -1,7 +1,7 @@
 <?php
 include("../conn.php");
 
-$itemname = $_REQUEST['itemname'];
+$itemname = addslashes($_REQUEST['itemname']);
 $invqty = $_REQUEST['invqty'];
 $category = $_REQUEST['category'];
 $rate = $_REQUEST['rate'];

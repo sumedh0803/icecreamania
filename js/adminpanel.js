@@ -98,7 +98,7 @@ $(document).ready(function(){
                 }
                 else
                 {
-                    console.log(data)
+                    console.log(data);
                 }
             },
             error: function (data){
