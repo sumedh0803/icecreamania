@@ -5,13 +5,14 @@ $itemname = $_REQUEST['itemname'];
 $invqty = $_REQUEST['invqty'];
 $category = $_REQUEST['category'];
 $rate = $_REQUEST['rate'];
-$description = $_REQUEST['description'];
+$description = addslashes($_REQUEST['description']);
 $file = $_FILES['file'];
 $itemid = $_REQUEST['itemid'];
 $special = $_REQUEST['special'];
 
 $target_dir = "../productImages/";
-$target_file = $target_dir . basename($_FILES["file"]["name"]);
+$target_file = $target_dir . $itemid . strstr(basename($_FILES["file"]["name"]),".");
+//echo "Filename: ". $itemid . strstr(basename($_FILES["file"]["name"]),"."); 
 
 //echo $itemname, $invqty, $category, $rate, $description,$_FILES["file"]["name"];
 
