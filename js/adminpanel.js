@@ -85,7 +85,7 @@ $(document).ready(function(){
                     setTimeout(function(){
                         //fade back
                         $(".productbtn").html("Add to inventory");
-                        $(".progress-inventory").css("visibility","hidden");
+                        $(".progress-inventorygit").css("visibility","hidden");
                         $(".productsform").trigger('reset');
                         $("[for=uploadfile]").text("Product Image");
                         $(".productsform").children().removeClass("is-dirty");
