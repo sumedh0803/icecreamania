@@ -45,6 +45,16 @@ $(document).ready(function(){
         readURL(this);
       });
 
+      $("#special").change(
+        function(){
+            if ($(this).is(':checked')) {
+                 spl = 1;
+            }
+            else {
+                 spl = 0;
+            }
+        });
+
 
     // Ajax call for adding new products
     $(".productbtn").on("click",function(e){
@@ -57,6 +67,8 @@ $(document).ready(function(){
         formData.append('description', $("#description").val());
         formData.append('invqty', $("#invqty").val());
         formData.append('rate', $("#rate").val());
+        formData.append('itemid', $("#itemid").val());
+        formData.append('special', spl);
         $.ajax({
             type:"POST",
             url:"includes/addProduct.php",
@@ -78,6 +90,7 @@ $(document).ready(function(){
                         $("#product-image").remove();
                         $(".productimage").prepend('<img id="product-preview" src="./images/product-preview.png" alt="Product-Preview">');
                         $(".productimage").prepend('<div class="centered">Preview</div>');
+                        $('.mdl-checkbox.is-checked .mdl-checkbox__tick-outline').css("background", "none");
                     }, 2000);
                 }
                 else

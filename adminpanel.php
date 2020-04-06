@@ -58,7 +58,7 @@ $_SESSION["username"] = $_REQUEST['username'];
                                     <input class="mdl-textfield__input" name = "invqty" type="number" id="invqty">
                                     <label class="mdl-textfield__label" for="invqty" style="font-size:13px;">Quantity</label>
                                   </div>
-                                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 40%;">
+                                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
                                     <select class="mdl-textfield__input" id="category" name="category">
                                         <option></option>               
                                         <option value="Bucket (1 Quart)">Bucket (1 Quart)</option>
@@ -73,15 +73,11 @@ $_SESSION["username"] = $_REQUEST['username'];
                                     </select>
                                     <label class="mdl-textfield__label" for="category" style="font-size:13px;">Category</label>
                                   </div>
-                                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 30%;">
-                                    <input class="mdl-textfield__input" name = "itemid" type="text" id="itemid">
-                                    <label class="mdl-textfield__label" for="itemid" style="font-size:13px;">Product ID</label>
-                                  </div>
                                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 25%; margin-left: 5px;">
                                     <input class="mdl-textfield__input" name = "rate" type="number" id="rate">
                                     <label class="mdl-textfield__label" for="rate" style="font-size:13px;">Rate</label>
                                   </div>
-                                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 60%;">
+                                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 50%;">
                                     <textarea class="mdl-textfield__input" name = "description" type="text" rows= "3" id="description"></textarea>
                                     <label class="mdl-textfield__label" for="description" style="font-size:13px;">Product Description</label>
                                   </div>
@@ -89,12 +85,22 @@ $_SESSION["username"] = $_REQUEST['username'];
                                       <img id="product-preview" src="./images/product-preview.png" alt="Product-Preview">
                                       <div class="centered">Preview</div>
                                   </div>
-                                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--file--floating-label mdl-textfield--floating-label" style="width: 67%;">
+                                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--file--floating-label mdl-textfield--floating-label" style="width: 50%;">
                                     <input class="mdl-textfield__input" type="text" id="uploadFile" style="float:left;width:90%;"/>
                                     <label class="mdl-textfield__label" for="uploadfile" style="font-size:13px;">Product Image</label>
                                     <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--file" style="bottom:0%;float:right">
                                       <i class="material-icons">attach_file</i><input type="file" id="uploadBtn">
                                     </div>
+                                  </div>
+                                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 30%;">
+                                    <input class="mdl-textfield__input" name = "itemid" type="text" id="itemid">
+                                    <label class="mdl-textfield__label" for="itemid" style="font-size:13px;">Product ID</label>
+                                  </div>
+                                  <div class="mdl-textfield mdl-js-textfield mdl-textfield" style="width:10%;margin-left:30px;">
+                                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="special">
+                                        <input type="checkbox" id="special" name="special" class="mdl-checkbox__input" style="line-height:10px;">
+                                        <span class="mdl-checkbox__label">Special</span>
+                                    </label>
                                   </div>
                                   <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored productbtn" style="width: 100%; margin-top: 10px;">
                                     ADD TO INVENTORY

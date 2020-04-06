@@ -7,6 +7,8 @@ $category = $_REQUEST['category'];
 $rate = $_REQUEST['rate'];
 $description = $_REQUEST['description'];
 $file = $_FILES['file'];
+$itemid = $_REQUEST['itemid'];
+$special = $_REQUEST['special'];
 
 $target_dir = "../productImages/";
 $target_file = $target_dir . basename($_FILES["file"]["name"]);
@@ -19,7 +21,7 @@ $uploadOk = 1;
 $check = getimagesize($_FILES["file"]["tmp_name"]);
 if($check !== false) {
     move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
-    $sql = "INSERT INTO inventory(itemname,category,description,invqty,rate,imagepath) VALUES('$itemname', '$category', '$description', $invqty, $rate,'$target_file')";
+    $sql = "INSERT INTO inventory(itemname,category,description,invqty,rate,imagepath,itemid,special) VALUES('$itemname', '$category', '$description', $invqty, $rate,'$target_file','$itemid',$special)";
     $result = mysqli_query($conn, $sql);
 
     if(!$result)

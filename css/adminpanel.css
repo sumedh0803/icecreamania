@@ -107,21 +107,21 @@
     border-radius: 10px;
     margin-top: 20px;
     margin-right: 20px;
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 190px;
     position: relative;
     text-align: center;
 }
 
 #product-image {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 190px;
     border-radius: 10px;
 }
 
 #product-preview {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 190px;
     filter: blur(2px);
   -webkit-filter: blur(2px);
 }
@@ -132,7 +132,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     font-weight: bolder;
-    font-size: 20px;
+    font-size: 24px;
   } 
 
  
