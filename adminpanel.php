@@ -58,7 +58,7 @@ $_SESSION["username"] = $_REQUEST['username'];
                                     <input class="mdl-textfield__input" name = "invqty" type="number" id="invqty">
                                     <label class="mdl-textfield__label" for="invqty" style="font-size:13px;">Quantity</label>
                                   </div>
-                                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
+                                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 40%;">
                                     <select class="mdl-textfield__input" id="category" name="category">
                                         <option></option>               
                                         <option value="Bucket (1 Quart)">Bucket (1 Quart)</option>
@@ -72,6 +72,10 @@ $_SESSION["username"] = $_REQUEST['username'];
                                         <option value="Warm Desserts">Warm Desserts</option>
                                     </select>
                                     <label class="mdl-textfield__label" for="category" style="font-size:13px;">Category</label>
+                                  </div>
+                                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 30%;">
+                                    <input class="mdl-textfield__input" name = "itemid" type="text" id="itemid">
+                                    <label class="mdl-textfield__label" for="itemid" style="font-size:13px;">Product ID</label>
                                   </div>
                                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 25%; margin-left: 5px;">
                                     <input class="mdl-textfield__input" name = "rate" type="number" id="rate">
