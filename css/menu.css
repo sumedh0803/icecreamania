@@ -2,9 +2,11 @@
 {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  height: 100%;
-  background-color: rgb(252, 250, 250);
+    background-color: rgb(252, 250, 250);
   border-radius: 5px;
+  overflow: hidden;
+  padding: 10px;
+  
 }
 
 .bg-gradient
@@ -16,4 +18,75 @@
     right: 0;
     position: absolute;
     z-index: 0;
+    overflow: scroll;
+}
+
+.product-container
+{
+    border: 1px solid #c0c0c0;
+    border-radius: 10px;
+    background-color: white;
+    float: left;
+    padding: 2%;
+    margin: 10px 37px;
+    transition: 0.3s;
+    width: 230px;
+    height: 480px;
+}
+
+.product-container:hover
+{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.product-title
+{
+    font-size: 20px;
+    font-weight: 900;
+    color: rgb(233,30,99);
+    width: 225px;
+    height: 40px;
+    overflow: hidden; 
+    display:-webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.product-price
+{
+    font-size: 16px;
+    font-weight: 900;
+    margin-top: 5px;
+    color: rgb(0, 156, 26);
+}
+.product-desc
+{
+    font-size: 15px;
+    line-height: 20px;
+    margin: 10px 0px;
+    color: #8a8a8a;
+    width: 225px;
+    overflow: hidden; 
+    display:-webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    
+}
+.product-category
+{
+    color: white;
+    background-color:  rgb(233,30,99);
+    padding: 1.5px 3px;
+    font-weight: bold;
+    border-radius: 2px;
+    font-size: smaller;
+}
+.product-image
+{
+    /*width: 220px;*/
+}
+.favourite
+{
+    float:right;
+    color: red;
+    font-size: 16px;
+
 }
