@@ -4,7 +4,7 @@
         private $userName = "tK0HEv3ZWF";
         private $password = "t4qEtDKTnP";
         private $database = "tK0HEv3ZWF";
-        private $conn;
+        public $conn;
 
         public function connectDb(){
             $this->conn = mysqli_connect($this->hostName,$this->userName,$this->password,$this->database);
