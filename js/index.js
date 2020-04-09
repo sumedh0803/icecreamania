@@ -1,4 +1,5 @@
 $(document).ready(function (){
+    window.location = "index.html?#";
     var dialog = $("#dialog");
     var dialogDelivery = $("#dialog-delivery");
     var dialogNoDelivery = $("#dialog-no-delivery");
@@ -80,7 +81,7 @@ $(document).ready(function (){
                 {
                     //redir to admin
                     //alert("adminpanel.php?userid="+res[1]+"&username="+res[2]);
-                    window.location = "menu.html?userType=admin&userid="+res[1]+"&username="+res[2];
+                    window.location = "menu.php?usertype=admin&userid="+res[1]+"&username="+res[2];
                     //window.location.replace("menu.html?userid="+res[1]+"&username="+res[2]);
                 }
                 else if(res[0] == "user")
