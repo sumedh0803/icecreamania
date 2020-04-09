@@ -9,11 +9,13 @@ $pin = $_REQUEST['pin'];
 $email = $_REQUEST['email'];
 $pwd = $_REQUEST['pwd'];
 
-include('conn.php');
-//echo $fname, $lname, $addr1, $addr2, $phone, $city, $pin, $email, $pwd;
+require_once("dbcontroller.php");
+$db = new dbcontroller();
+$db -> connectDb();
+
 
 $sql = "SELECT * FROM user WHERE email = '$email'";
-$result=mysqli_query($conn,$sql);
+$result = $db->runQuery($sql);
 $rowcount = mysqli_num_rows($result);
 if($rowcount > 0)
 {
@@ -23,7 +25,7 @@ if($rowcount > 0)
 else
 {
     $sql = "SELECT * FROM user WHERE phone = $phone";
-    $result=mysqli_query($conn,$sql);
+    $result = $db->runQuery($sql);
     $rowcount = mysqli_num_rows($result);
     if($rowcount > 0)
     {
@@ -34,7 +36,7 @@ else
     {
         $pwdHash = md5($pwd);
         $sql = "INSERT INTO user(fname,lname,phone,email,password,addr1,addr2,zip,city) VALUES('$fname','$lname',$phone,'$email','$pwdHash','$addr1','$addr2',$pin,'$city')";
-        $result=mysqli_query($conn,$sql);
+        $result = $db->runQuery($sql);
         if(!$result)
             echo mysqli_error($conn);
         else

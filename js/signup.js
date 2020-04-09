@@ -341,7 +341,7 @@ $(document).ready(function(){
         e.preventDefault();
         $.ajax({
             type:"POST",
-            url:"addUsers.php",
+            url:"./includes/addUsers.php",
             data: { fname: fname,
                     lname: lname,
                     addr1: addr1,
