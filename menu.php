@@ -33,6 +33,8 @@ else
     <title>Ice-Creamania | Menu</title>
     <script>
       var usertype = "<?php echo $usertype;?>";
+      var username = "<?php echo $username;?>";
+      var userid = "<?php echo $userid;?>";
     </script>
     <script src="./js/menu.js"></script>
 </head>
@@ -93,18 +95,18 @@ else
                       <label class="mdl-textfield__label" for="itemid" style="font-size:13px;">Product ID</label>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield" style="width:10%;margin-left:30px;">
-                      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="special">
+                      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect special" for="special">
                           <input type="checkbox" id="special" name="special" class="mdl-checkbox__input" style="line-height:10px;">
                           <span class="mdl-checkbox__label">Special</span>
                       </label>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield" style="width:10%;margin-left:30px;">
-                      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="delete">
+                      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect delete" for="delete">
                           <input type="checkbox" id="delete" name="delete" class="mdl-checkbox__input" style="line-height:10px;">
                           <span class="mdl-checkbox__label">Delete</span>
                       </label>
                     </div>
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored updatebtn" style="width: 100%; margin-top: 10px;">
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored updatebtn" style="width: 100%; margin-top: 20px;">
                       UPDATE INVENTORY
                     </button>
                     <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate mdl-progress-accent progress-inventory" style="width: 100%;visibility: hidden;"></div>
@@ -117,7 +119,7 @@ else
           <span class="mdl-layout-title">Ice Creamania!</span>
           <!-- Add spacer, to align navigation to the right (add spacer if no search bar)
           <div class="mdl-layout-spacer"></div> -->
-          <div class="mdh-expandable-search mdl-cell--hide-phone">
+          <div class="mdh-expandable-search mdl-cell--hide-phone" style="margin-left:190px;">
             
             <form action="#">
               <input type="text" placeholder="Search" size="1" id="search-bar">
@@ -135,6 +137,7 @@ else
           </ul>
           <!-- Navigation. We hide it in small screens. -->
           <nav class="mdl-navigation mdl-layout--large-screen-only">
+              <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "adminpanel">Adminpanel</button>
               <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "profile" >Hello, <?php echo $username; ?></button>
               <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "cart">Cart</button>
           </nav>
