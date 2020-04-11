@@ -537,12 +537,8 @@ function addToCart(qty,id)
 }
 
 
-<<<<<<< Updated upstream
 // Admin part-----------------------------------------------------------------------------
-=======
 
-// Admin part------------------------------------------------------------------------
->>>>>>> Stashed changes
 
 function editProduct(id)
 {
