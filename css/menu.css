@@ -215,13 +215,13 @@ input::-webkit-inner-spin-button {
   width: 38px;
   position: relative;
 }
-.button-plus
+.button-plus, .button-plus-cust 
 {
     background-color: #00c853;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
-.button-minus
+.button-minus,.button-minus-cust
 {
     background-color: #aaa;
     cursor: not-allowed;
@@ -238,6 +238,11 @@ input::-webkit-inner-spin-button {
   font-size: 13px;
   margin: 0 0 5px;
   resize: vertical;
+}
+
+.quantity-field-cust
+{
+    text-align: center;
 }
 
 .button-plus {
@@ -262,9 +267,9 @@ input[type="number"] {
     margin-left: auto;
     margin-right: auto;
     z-index: 100;
-    height: 57vh;
-    width: 100vh;
-    border-radius: 2%;
+    height: 50vh;
+    width: 105vh;
+    border-radius: 10px;
     border: 0px solid black;
     -webkit-box-shadow: 3px 7px 23px 1px rgba(117,117,117,1);
     -moz-box-shadow: 3px 7px 23px 1px rgba(117,117,117,1);
@@ -273,6 +278,13 @@ input[type="number"] {
     display: none;
     padding: 1%;
     background: white;
+}
+#customize
+{
+    padding: 2%;
+}
+#edit{
+    height: 57vh;
 }
 .close-icon
 {
@@ -342,6 +354,7 @@ input[type="number"] {
     width: 200px;
     height: 190px;
     border-radius: 10px;
+    margin-left: 15px;
 }
 
 #product-preview {
@@ -358,4 +371,51 @@ input[type="number"] {
     transform: translate(-50%, -50%);
     font-weight: bolder;
     font-size: 24px;
-  } 
+  }
+  
+  .prod-title
+  {
+      font-size: 26px;
+      float: left;
+      font-weight: bolder;
+      color: rgb(233,30,99);
+      margin: 10px 0px;
+    
+  }
+  .prod-desc
+  {
+   
+    float: left;
+    clear: both;
+    font-size: medium;
+    margin: 10px 0px;
+  }
+
+  .prod-image
+  {
+    position: relative;
+    top: -20px;
+    float: right;
+   
+  }
+  .prod-price
+  {
+    clear: both;
+    font-size: 22px;
+    font-weight: 900;
+    border-bottom: 1px solid #aaa;
+    padding-bottom: 10px;
+  }
+  .prod-extra
+  {
+    clear: both;
+    margin-top: 20px;
+    overflow-y: scroll;
+    height: 29vh;
+  }
+
+.extra-price
+{
+    font-weight: bolder;
+    float: right;
+}

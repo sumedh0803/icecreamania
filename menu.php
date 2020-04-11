@@ -2,6 +2,7 @@
 session_start();
 if(isset($_REQUEST['username']) && isset($_REQUEST['userid']) && isset($_REQUEST['usertype']))
 {
+  //getting params from URL
   $username = $_REQUEST['username'];
   $userid = $_REQUEST['userid'];
   $usertype = $_REQUEST['usertype'];
@@ -40,13 +41,29 @@ else
 </head>
 <body>
 
-<dialog id="customize">
-      <span class="material-icons close-icon" style="position: relative;top: 0;left: 97%;" id="dialog-close">close</span>
-      <div id = "prodId"></div> 
-    </dialog>
+<dialog id="customize" class = "gotu">
+      <span class="material-icons close-icon" style="position: relative;float:right;z-index=10;" id="dialog-close">close</span>
+      <div class = "" style = "width:60%;float:left;overflow:hidden">
+        <div class = "prod-title gotu"></div>
+        <div class = "prod-price gotu"></div>
+        <div class = "prod-desc gotu"></div>
+        <div class = "prod-extra"></div> 
+      </div>
+      <div class = "prod-image">
+        <img width = 250>
+        <div class="input-group">
+            <input type="button" value="-" class="button-minus-cust" data-field="quantity" style = "width:33%">
+            <input type="number" step="1" max="10" value="1" name="quantity" class="quantity-field-cust" style = "width:31%">
+            <input type="button" value="+" class="button-plus-cust" data-field="quantity" style = "width:33%">
+        </div>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" style="width: 100%;" id = "addtocart" itemid = "">
+          Add to cart
+        </button>
+      </div>
+</dialog>
   <div id="edit" class = "gotu">
-        <div class = "title">Add Products:</div>
-        <span class="material-icons close-icon" style="position: relative;top: 0;left: 67%;" id="edit-close">close</span>
+    <div class = "title">Add Products:</div>
+    <span class="material-icons close-icon" style="position: relative;top: 0;left: 67%;" id="edit-close">close</span>
               <form class="productsform" enctype="multipart/form-data" method = "post">
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
                       <input class="mdl-textfield__input" name = "itemname" type="text" id="itemname">
@@ -130,10 +147,7 @@ else
           
 
           <ul class = "sugg-box">
-            <!-- <li class = "search-item">item1</li>
-            <li class = "search-item">item1</li>
-            <li class = "search-item">item1</li>
-            <li class = "search-item">item1</li> -->
+           
           </ul>
           <!-- Navigation. We hide it in small screens. -->
           <nav class="mdl-navigation mdl-layout--large-screen-only">
