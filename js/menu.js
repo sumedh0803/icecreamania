@@ -538,8 +538,6 @@ function addToCart(qty,id)
 
 
 // Admin part-----------------------------------------------------------------------------
-
-
 function editProduct(id)
 {
     $(".updatebtn").on("click", function(e){
