@@ -27,7 +27,20 @@
         $end = $_REQUEST['end'];
         $searchQuery = $_REQUEST['searchQuery'];
         $category = $_REQUEST['category'];
-        if($category != "" && ($start != "" && $end != ""))
+        $special = $_REQUEST['special'];
+
+        if($special == "1")
+        {
+            if($usertype == "user")
+            {
+                $sql = "SELECT * FROM inventory WHERE special = 1 AND deleteitem = 0";
+            }
+            else
+            {
+                $sql = "SELECT * FROM inventory WHERE special = 1";
+            }
+        }
+        else if($category != "" && ($start != "" && $end != ""))
         {
             if($usertype == "user")
             {
@@ -56,6 +69,36 @@
                 $sql .= ") LIMIT 12 offset $start";
 
                 }    
+        }
+        else if($category != "" && $searchQuery != "")
+        {
+            if($usertype == "user")
+            {
+                $sql = "SELECT * FROM inventory WHERE deleteitem = 0 AND lower(itemname) LIKE lower('%$searchQuery%') AND category in (";
+                $categories = explode(",",$category);
+                for($i = 0;$i < sizeof($categories);$i++)
+                {
+                    if($i == sizeof($categories) - 1)
+                        $sql .= "'".$categories[$i]."'";
+                    else
+                        $sql .= "'".$categories[$i]."',";   
+                }
+                $sql .= ")";
+            }
+            else
+            {
+                $sql = "SELECT * FROM inventory WHERE lower(itemname) LIKE lower('%$searchQuery%') and category in (";
+                $categories = explode(",",$category);
+                for($i = 0;$i < sizeof($categories);$i++)
+                {
+                    if($i == sizeof($categories) - 1)
+                        $sql .= "'".$categories[$i]."'";
+                    else
+                        $sql .= "'".$categories[$i]."',";   
+                }
+                $sql .= ")";
+            }
+
         }
         else if($category != "")
         {   
@@ -112,7 +155,7 @@
         }
         $result = $db->runQuery($sql);
         $rowcount = mysqli_num_rows($result);
-        if($rowcount > 0)
+        if($rowcount >= 0)
         {
             $data = array();
             while($row = mysqli_fetch_assoc($result))
@@ -124,7 +167,7 @@
         }
         else
         {
-            echo mysqli_error($db->$conn);
+            echo "ERROR";
         }
 
         }

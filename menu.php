@@ -61,74 +61,74 @@ else
         </button>
       </div>
 </dialog>
-  <div id="edit" class = "gotu">
-    <div class = "title">Add Products:</div>
-    <span class="material-icons close-icon" style="position: relative;top: 0;left: 67%;" id="edit-close">close</span>
-              <form class="productsform" enctype="multipart/form-data" method = "post">
-                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
-                      <input class="mdl-textfield__input" name = "itemname" type="text" id="itemname">
-                      <label class="mdl-textfield__label" for="itemname" style="font-size:13px;">Product Name</label>
-                    </div>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 25%;margin-left: 5px;">
-                      <input class="mdl-textfield__input" name = "invqty" type="number" id="invqty">
-                      <label class="mdl-textfield__label" for="invqty" style="font-size:13px;">Quantity</label>
-                    </div>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
-                      <select class="mdl-textfield__input" id="category" name="category">
-                          <option></option>               
-                          <option value="Bucket (1 Quart)">Bucket (1 Quart)</option>
-                          <option value="Cakes">Cakes</option>
-                          <option value="Cappuccino Blast">Cappuccino Blast</option>
-                          <option value="Floats and Freezes">Floats and Freezes</option>
-                          <option value="Milk Shakes">Milk Shakes</option>
-                          <option value="Scoops">Scoops</option>
-                          <option value="Smoothies">Smoothies</option>
-                          <option value="Sundae">Sundae</option>
-                          <option value="Warm Desserts">Warm Desserts</option>
-                      </select>
-                      <label class="mdl-textfield__label" for="category" style="font-size:13px;">Category</label>
-                    </div>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 25%; margin-left: 5px;">
-                      <input class="mdl-textfield__input" name = "rate" type="number" id="rate">
-                      <label class="mdl-textfield__label" for="rate" style="font-size:13px;">Rate</label>
-                    </div>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 50%;">
-                      <textarea class="mdl-textfield__input" name = "description" type="text" rows= "3" id="description"></textarea>
-                      <label class="mdl-textfield__label" for="description" style="font-size:13px;">Product Description</label>
-                    </div>
-                    <div class="productimage">
-                        <img id="product-preview" src="./images/product-preview.png" alt="Product-Preview">
-                        <div class="centered">Preview</div>
-                    </div>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--file--floating-label mdl-textfield--floating-label" style="width: 50%;">
-                      <input class="mdl-textfield__input" type="text" id="uploadFile" style="float:left;width:90%;"/>
-                      <label class="mdl-textfield__label" for="uploadfile" style="font-size:13px;">Product Image</label>
-                      <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--file" style="bottom:0%;float:right">
-                        <i class="material-icons">attach_file</i><input type="file" id="uploadBtn">
-                      </div>
-                    </div>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 30%;">
-                      <input class="mdl-textfield__input" name = "itemid" type="text" id="itemid">
-                      <label class="mdl-textfield__label" for="itemid" style="font-size:13px;">Product ID</label>
-                    </div>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield" style="width:10%;margin-left:30px;">
-                      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect special" for="special">
-                          <input type="checkbox" id="special" name="special" class="mdl-checkbox__input" style="line-height:10px;">
-                          <span class="mdl-checkbox__label">Special</span>
-                      </label>
-                    </div>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield" style="width:10%;margin-left:30px;">
-                      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect delete" for="delete">
-                          <input type="checkbox" id="delete" name="delete" class="mdl-checkbox__input" style="line-height:10px;">
-                          <span class="mdl-checkbox__label">Delete</span>
-                      </label>
-                    </div>
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored updatebtn" style="width: 100%; margin-top: 20px;">
-                      UPDATE INVENTORY
-                    </button>
-                    <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate mdl-progress-accent progress-inventory" style="width: 100%;visibility: hidden;"></div>
-                  </form>        
-              </div>
+<dialog id="edit" class = "gotu">
+  <div class = "title">Add Products:</div>
+  <span class="material-icons close-icon" style="position: relative;top: 0;left: 67%;" id="edit-close">close</span>
+  <form class="productsform" enctype="multipart/form-data" method = "post">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
+          <input class="mdl-textfield__input" name = "itemname" type="text" id="itemname">
+          <label class="mdl-textfield__label" for="itemname" style="font-size:13px;">Product Name</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 25%;margin-left: 5px;">
+          <input class="mdl-textfield__input" name = "invqty" type="number" id="invqty">
+          <label class="mdl-textfield__label" for="invqty" style="font-size:13px;">Quantity</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70%;">
+          <select class="mdl-textfield__input" id="category" name="category">
+              <option></option>               
+              <option value="Bucket (1 Quart)">Bucket (1 Quart)</option>
+              <option value="Cakes">Cakes</option>
+              <option value="Cappuccino Blast">Cappuccino Blast</option>
+              <option value="Floats and Freezes">Floats and Freezes</option>
+              <option value="Milk Shakes">Milk Shakes</option>
+              <option value="Scoops">Scoops</option>
+              <option value="Smoothies">Smoothies</option>
+              <option value="Sundae">Sundae</option>
+              <option value="Warm Desserts">Warm Desserts</option>
+          </select>
+          <label class="mdl-textfield__label" for="category" style="font-size:13px;">Category</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 25%; margin-left: 5px;">
+          <input class="mdl-textfield__input" name = "rate" type="number" id="rate">
+          <label class="mdl-textfield__label" for="rate" style="font-size:13px;">Rate</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 50%;">
+          <textarea class="mdl-textfield__input" name = "description" type="text" rows= "3" id="description"></textarea>
+          <label class="mdl-textfield__label" for="description" style="font-size:13px;">Product Description</label>
+        </div>
+        <div class="productimage">
+            <img id="product-preview" src="./images/product-preview.png" alt="Product-Preview">
+            <div class="centered">Preview</div>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--file--floating-label mdl-textfield--floating-label" style="width: 50%;">
+          <input class="mdl-textfield__input" type="text" id="uploadFile" style="float:left;width:90%;"/>
+          <label class="mdl-textfield__label" for="uploadfile" style="font-size:13px;">Product Image</label>
+          <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--file" style="bottom:0%;float:right">
+            <i class="material-icons">attach_file</i><input type="file" id="uploadBtn">
+          </div>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 30%;">
+          <input class="mdl-textfield__input" name = "itemid" type="text" id="itemid">
+          <label class="mdl-textfield__label" for="itemid" style="font-size:13px;">Product ID</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield" style="width:10%;margin-left:30px;">
+          <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect special" for="special">
+              <input type="checkbox" id="special" name="special" class="mdl-checkbox__input" style="line-height:10px;">
+              <span class="mdl-checkbox__label">Special</span>
+          </label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield" style="width:10%;margin-left:30px;">
+          <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect delete" for="delete">
+              <input type="checkbox" id="delete" name="delete" class="mdl-checkbox__input" style="line-height:10px;">
+              <span class="mdl-checkbox__label">Delete</span>
+          </label>
+        </div>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored updatebtn" style="width: 100%; margin-top: 20px;">
+          UPDATE INVENTORY
+        </button>
+        <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate mdl-progress-accent progress-inventory" style="width: 100%;visibility: hidden;"></div>
+      </form>        
+</dialog>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
       <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
@@ -162,6 +162,7 @@ else
           <div class="page-content"><!-- Your content goes here -->
             <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
                 <div class="mdl-layout__drawer  custom-side-bar">
+                  <div class = "gotu" style = "padding: 20px 40px 5px 40px;margin: 0px;">Choose one or more categories</div>
                   <nav class="mdl-navigation category-list">
                     <a class="mdl-navigation__link" >Bucket (1 Quart)</a>
                     <a class="mdl-navigation__link" >Cakes</a>
@@ -173,6 +174,7 @@ else
                     <a class="mdl-navigation__link" >Sundae</a>
                     <a class="mdl-navigation__link" >Warm Desserts</a>
                   </nav>
+                  <a class="mdl-navigation__link spl-select" style = "border-top:1.5px solid #aaa;">Ice-Creamania! Specials</a>
                 </div>
                 <main class="mdl-layout__content" style="margin-left: 20%;">
                     <div class="page-content" style="height: 100%; position: relative;">
@@ -180,7 +182,10 @@ else
                             <div class="card main-card">
                                 <div class = "pagination" style="margin: 10px 0px;"></div>
                                 <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active spinner"></div>
-                                <div class = "products" style="overflow: hidden;"></div>
+                                <div class = "products" style="overflow: hidden;">
+                                  
+                                </div>
+
                                 <!-- CONTENT LOADED BY JS -->
                             </div>
                         </div>

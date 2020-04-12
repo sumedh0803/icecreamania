@@ -71,6 +71,20 @@ $(document).ready(function(){
         
     });
 
+    $(".spl-select").on("click",function(){
+        if($(this).hasClass("special-selected"))
+        {
+            $(this).removeClass("special-selected"); 
+            window.location.href = "menu.php";
+        }
+        else
+        {
+            $(".pagination-container").hide();
+            $(this).addClass("special-selected");
+            showProducts("sp",null,null,null,null)
+        }
+        
+    })
     
     let searchParams = new URLSearchParams(window.location.search)
     if(searchParams.has('searchQuery'))
@@ -102,9 +116,8 @@ $(document).ready(function(){
     });
 
     $('.search').click(function(event){
-         searchQuery = $('#search-bar').val();
-         window.location.href = "menu.php?searchQuery="+searchQuery;
-        //alert("test");
+        searchQuery = $('#search-bar').val();
+        search(searchQuery)
         
     });
     
@@ -132,6 +145,10 @@ $(document).ready(function(){
         console.log(categories);
         showProducts("c",null,null,null,categories);
 
+    });
+    $(".category-list>a").on("mouseover",function(){
+        
+        $(this).css("cursor","pointer");
     });
     $(".category-list>a").on("mousedown",function(){
         $(this).addClass("mdl-color--pink-700");
@@ -207,8 +224,8 @@ $(document).ready(function(){
 
 function search(searchQuery)
 {
-    //alert("menu.html?searchQuery="+searchQuery);
-    window.location.href = "menu.php?searchQuery="+searchQuery+"&usertype="+usertype;
+    showProducts("s",null,null,searchQuery,categories);
+    //window.location.href = "menu.php?searchQuery="+searchQuery+"&usertype="+usertype;
 }
 
 function load(elem)
@@ -225,125 +242,145 @@ function load(elem)
     $(elem).addClass("active");
 }
 
-function showProducts(caller,start,end,searchQuery,category)
+function showProducts(caller,start,end,searchQuery,category,special)
 {
+    console.log(caller, start, end, searchQuery,category, special);
     $.ajax({
         url: "./includes/displayMenu.php",
         data: { start: start == null? "" : start,
                 end: end == null? "" : end,
                 searchQuery: searchQuery == null? "" : searchQuery,
                 category: category == null? "" : category.join(),
-                usertype: usertype},
+                usertype: usertype,
+                special : caller == "sp" ? 1 : 0},
         success: function(data){
+            console.log(data);
+            $(".products").empty();
+            $(".sugg-box").hide();
             $(".spinner").css("display","none");
             var product = JSON.parse(data);
-            if(caller == "l" || caller == "c"   )
-                makePagination(product.length);
-            limit = (product.length < 12) ? product.length : 12;
-            for(var i = 0; i < limit ; i++) {
-                var itemid = product[i]['itemid'];
-                var itemname = product[i]['itemname'];
-                var category = product[i]['category'];
-                var description = product[i]['description'];
-                var rate = product[i]['rate'];
-                var special = product[i]['special'];
-                var imagepath = product[i]['imagepath'];
-                var invqty = parseInt(product[i]['invqty']);
-                limit = Math.min(limit,10);
-                if(special == "0")
+            if(product.length == 0)
+            {
+                $(".pagination-container").hide();
+                $(".products").append("<div class = 'gotu' style = 'text-align: center;font-size: xx-large;padding: 20px 0px'>No products found</div>");
+            }
+            else
+            {
+                if(caller == "l" || caller == "c"  || caller == "s" )
+                    makePagination(product.length);
+                if(caller == "sp")
                 {
-                    var s = `
-                    <div class = "product-container">
-                    <div><span class="product-category" style="position: absolute;">`+category+`</span></div>
-                    <div class = product-img>
-                        <img src = "`+imagepath.substring(1)+`" width="225" height = "250">
-                    </div>
-                    <div class = "product-title gotu" style="width: 225px;">`+itemname+`</div>
-                    <div class = "product-price gotu" style="width: auto;">$ `+rate+`</div>
-                    <div class = "product-desc" style="width: 225px;overflow: hidden; display:-webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;">`+description+`</div>`;
-                    if(usertype == "admin")
-                    {
-                        s += `
-                        <div><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" style = "width:100%;margin-bottom: 10px;cursor:not-allowed;" disabled>
-                            Customize & Add to cart
-                            </button></div>
-                            <div><button  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored admin-edit" style = "width:100%;" id = `+itemid+`>
-                                Edit item
-                            </button></div>
-                        </div>`;
-                    }
-                    else
-                    {
-                        s += `
-                        <div class="input-group">
-                            <input type="button" value="-" class="button-minus" data-field="quantity">
-                            <input type="number" step="1" max="`+invqty+`" value="1" name="quantity" class="quantity-field">
-                            <input type="button" value="+" class="button-plus" data-field="quantity">
-                        </div>
-                        <div><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent addtocart" style = "width:100%;margin-bottom: 10px;" id = `+itemid+`>
-                        Customize & Add to cart
-                        </button></div>`;
-                    }
-                    var htmlObject = $(s); 
-                    $(htmlObject).appendTo(".products");
+                    limit = product.length;
                 }
                 else
                 {
-                    var s = `
-                    <div class = "product-container">
-                        <div>
-                            <span class="product-category" style="position: absolute;float:left">`+category+`</span>
-                        </div>
+                    limit = (product.length <= 12) ? product.length : 12;
+                }
+                for(var i = 0; i < limit ; i++) {
+                    var itemid = product[i]['itemid'];
+                    var itemname = product[i]['itemname'];
+                    var category = product[i]['category'];
+                    var description = product[i]['description'];
+                    var rate = product[i]['rate'];
+                    var special = product[i]['special'];
+                    var imagepath = product[i]['imagepath'];
+                    var invqty = parseInt(product[i]['invqty']);
+                    if(special == "0")
+                    {
+                        var s = `
+                        <div class = "product-container">
+                        <div><span class="product-category" style="position: absolute;">`+category+`</span></div>
                         <div class = product-img>
-                            <img src = "`+imagepath.substring(1)+`" width="225px" height = "250">
+                            <img src = "`+imagepath.substring(1)+`" width="225" height = "250">
                         </div>
                         <div class = "product-title gotu" style="width: 225px;">`+itemname+`</div>
-                        <div class = "product-price gotu" style="width: auto;">$ `+rate+`<span class = "tooltip favourite">Our Special</span><span class="material-icons favourite" >favorite</span></div>
-                        <div class = "product-desc">`+description+`</div>`;
+                        <div class = "product-price gotu" style="width: auto;">$ `+rate+`</div>
+                        <div class = "product-desc" style="width: 225px;overflow: hidden; display:-webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;">`+description+`</div>`;
                         if(usertype == "admin")
                         {
                             s += `
                             <div><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" style = "width:100%;margin-bottom: 10px;cursor:not-allowed;" disabled>
-                            Customize & Add to cart
-                            </button></div>
-                            <div><button  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored admin-edit" style = "width:100%;" id = `+itemid+`>
-                                Edit item
-                            </button></div>
-                        </div>
-                        `;
+                                Customize & Add to cart
+                                </button></div>
+                                <div><button  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored admin-edit" style = "width:100%;" id = `+itemid+`>
+                                    Edit item
+                                </button></div>
+                            </div>`;
                         }
                         else
                         {
                             s += `
                             <div class="input-group">
-                                <input type="button" value="-" class="button-minus" data-field="quantity" disabled>
-                                <input type="number" step="1" max="10" value="1" name="quantity" class="quantity-field">
+                                <input type="button" value="-" class="button-minus" data-field="quantity">
+                                <input type="number" step="1" max="`+invqty+`" value="1" name="quantity" class="quantity-field">
                                 <input type="button" value="+" class="button-plus" data-field="quantity">
                             </div>
                             <div><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent addtocart" style = "width:100%;margin-bottom: 10px;" id = `+itemid+`>
                             Customize & Add to cart
                             </button></div>`;
                         }
-                    var htmlObject = $(s); 
-                    $(htmlObject).appendTo(".products");
-                    //$(".main-card").appendT(htmlObject);
+                        var htmlObject = $(s); 
+                        $(htmlObject).appendTo(".products");
+                    }
+                    else
+                    {
+                        var s = `
+                        <div class = "product-container">
+                            <div>
+                                <span class="product-category" style="position: absolute;float:left">`+category+`</span>
+                            </div>
+                            <div class = product-img>
+                                <img src = "`+imagepath.substring(1)+`" width="225px" height = "250">
+                            </div>
+                            <div class = "product-title gotu" style="width: 225px;">`+itemname+`</div>
+                            <div class = "product-price gotu" style="width: auto;">$ `+rate+`<span class = "tooltip favourite">Our Special</span><span class="material-icons favourite" >favorite</span></div>
+                            <div class = "product-desc">`+description+`</div>`;
+                            if(usertype == "admin")
+                            {
+                                s += `
+                                <div><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" style = "width:100%;margin-bottom: 10px;cursor:not-allowed;" disabled>
+                                Customize & Add to cart
+                                </button></div>
+                                <div><button  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored admin-edit" style = "width:100%;" id = `+itemid+`>
+                                    Edit item
+                                </button></div>
+                            </div>
+                            `;
+                            }
+                            else
+                            {
+                                s += `
+                                <div class="input-group">
+                                    <input type="button" value="-" class="button-minus" data-field="quantity" disabled>
+                                    <input type="number" step="1" max="10" value="1" name="quantity" class="quantity-field">
+                                    <input type="button" value="+" class="button-plus" data-field="quantity">
+                                </div>
+                                <div><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent addtocart" style = "width:100%;margin-bottom: 10px;" id = `+itemid+`>
+                                Customize & Add to cart
+                                </button></div>`;
+                            }
+                        var htmlObject = $(s); 
+                        $(htmlObject).appendTo(".products");
+                        //$(".main-card").appendT(htmlObject);
+                    }
                 }
-              }
-              $('.input-group').on('click', '.button-plus', function(e) {
-                incrementValue(e,invqty);
-              });
-              $('.input-group').on('click', '.button-minus', function(e) {
-                decrementValue(e,invqty);
+                $('.input-group').on('click', '.button-plus', function(e) {
+                    incrementValue(e,invqty);
                 });
-            $(".addtocart").on("click", function(){
-                qty = $(this).closest('div').siblings(".input-group").find(".quantity-field").val();
-                var id = $(this).attr("id");
-                addToCart(qty,id);
-            })
-            $(".admin-edit").on("click", function(e){
-                var id = $(this).attr("id");
-                editProduct(id);
-            })
+                $('.input-group').on('click', '.button-minus', function(e) {
+                    decrementValue(e,invqty);
+                    });
+                $(".addtocart").on("click", function(){
+                    qty = $(this).closest('div').siblings(".input-group").find(".quantity-field").val();
+                    var id = $(this).attr("id");
+                    addToCart(qty,id);
+                });
+                $(".admin-edit").on("click", function(e){
+                    var id = $(this).attr("id");
+                    editProduct(id);
+                });
+            }
+            
           
         },
         error: function(data){
