@@ -44,7 +44,6 @@ else
     $sql = "UPDATE inventory SET itemname = '$itemname', invqty = $invqty, category = '$category', 
         description = '$description', rate = $rate, special = $special,
         deleteitem = $delete WHERE itemid = '$itemid'";
-
         $result = $db->runQuery($sql);
         if(!$result)
             echo "PHP: ".mysqli_error($conn);

@@ -80,18 +80,17 @@ $(document).ready(function (){
                 if(res[0] == "admin")
                 {
                     //redir to admin
-                    //alert("adminpanel.php?userid="+res[1]+"&username="+res[2]);
-                    window.location = "menu.php?usertype=admin&userid="+res[1]+"&username="+res[2];
-                    //window.location.replace("menu.html?userid="+res[1]+"&username="+res[2]);
+                    window.location = "menu.php";
                 }
                 else if(res[0] == "user")
                 {
-                    //window.location.replace("adminpanel.php?userType=user&userid=user&username="+res[2]);
+                    window.location = "menu.php";
                 }
                 else if(res[0] == "error")
                 {
-                    alert(data);
                     //error msg
+                    alert("Please check your credentials");
+                    
                 }
             },
             error: function (data){

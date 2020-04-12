@@ -1,23 +1,33 @@
 <?php 
 session_start();
-if(isset($_REQUEST['username']) && isset($_REQUEST['userid']) && isset($_REQUEST['usertype']))
-{
-  //getting params from URL
-  $username = $_REQUEST['username'];
-  $userid = $_REQUEST['userid'];
-  $usertype = $_REQUEST['usertype'];
-  $_SESSION['username'] = $username;
-  $_SESSION['userid'] = $userid;
-  $_SESSION['usertype'] = $usertype;
-}
-else
+if(isset($_SESSION['username']) && isset($_SESSION['userid']) && isset($_SESSION['usertype']))
 {
   $username =  $_SESSION['username'];
   $userid = $_SESSION['userid'];
-  $usertype = $_SESSION['usertype'];
+  $usertype = $_SESSION['usertype'];  
+  ?>
+  <script>
+      usertype = "<?php echo $usertype ?>"
+      username = "<?php echo $username ?>"
+      userid = "<?php echo $userid ?>"
+      canSeeMenu = "1";
+  </script>
+  <?php
 }
-
-
+else
+{
+  $username =  "Guest";
+  $userid = "999";
+  $usertype = "user";
+?>
+<script>
+  alert("Please sign in first");
+  canSeeMenu = "0"
+  usertype = "user"
+  username = "Guest"
+  userid = "999"</script>;
+<?php 
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,11 +42,6 @@ else
     <link rel="stylesheet" href="./css/menu.css">
     <script src = "https://code.jquery.com/jquery-3.4.1.js"></script>
     <title>Ice-Creamania | Menu</title>
-    <script>
-      var usertype = "<?php echo $usertype;?>";
-      var username = "<?php echo $username;?>";
-      var userid = "<?php echo $userid;?>";
-    </script>
     <script src="./js/menu.js"></script>
 </head>
 <body>
@@ -133,12 +138,12 @@ else
       <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
           <!-- Title -->
-          <span class="mdl-layout-title">Ice Creamania!</span>
+          <a href = "index.html" style = "color:white;"><span class="mdl-layout-title">Ice Creamania!</span></a>
           <!-- Add spacer, to align navigation to the right (add spacer if no search bar)
           <div class="mdl-layout-spacer"></div> -->
           <div class="mdh-expandable-search mdl-cell--hide-phone" style="margin-left:190px;">
             
-            <form action="#">
+            <form action="#" style = "margin-bottom: 0px;">
               <input type="text" placeholder="Search" size="1" id="search-bar">
             </form>
             <i class="material-icons search">search</i>
@@ -174,7 +179,7 @@ else
                     <a class="mdl-navigation__link" >Sundae</a>
                     <a class="mdl-navigation__link" >Warm Desserts</a>
                   </nav>
-                  <a class="mdl-navigation__link spl-select" style = "border-top:1.5px solid #aaa;">Ice-Creamania! Specials</a>
+                  <a class="mdl-navigation__link spl-select" style = "border-top:1.5px solid #aaa;cursor: pointer;">Ice-Creamania! Specials</a>
                 </div>
                 <main class="mdl-layout__content" style="margin-left: 20%;">
                     <div class="page-content" style="height: 100%; position: relative;">

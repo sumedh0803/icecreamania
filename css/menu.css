@@ -276,13 +276,10 @@ input[type="number"] {
     box-shadow: 3px 7px 23px 1px rgba(117,117,117,1);
     background-color: #ffffff;
     display: none;
-    padding: 1%;
+    padding: 2%;
     background: white;
 }
-#customize
-{
-    padding: 2%;
-}
+
 #edit{
     height: 57vh;
 }

@@ -1,4 +1,5 @@
 $(document).ready(function(){
+         
     if(usertype == "admin")
     {
         $("#adminpanel").on("click", function() {
@@ -6,10 +7,10 @@ $(document).ready(function(){
         });
     }
     else{
+        
         $("#adminpanel").hide();
         $(".mdh-expandable-search").css("margin-left","50px");
     }
-    
 
     customize = $("#customize");
     edit = $("#edit");
@@ -296,29 +297,59 @@ function showProducts(caller,start,end,searchQuery,category,special)
                         <div class = "product-title gotu" style="width: 225px;">`+itemname+`</div>
                         <div class = "product-price gotu" style="width: auto;">$ `+rate+`</div>
                         <div class = "product-desc" style="width: 225px;overflow: hidden; display:-webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;">`+description+`</div>`;
-                        if(usertype == "admin")
+                        if(canSeeMenu == "1")
                         {
-                            s += `
-                            <div><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" style = "width:100%;margin-bottom: 10px;cursor:not-allowed;" disabled>
+                            if(usertype == "admin")
+                            {
+                                s += `
+                                <div><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" style = "width:100%;margin-bottom: 10px;cursor:not-allowed;" disabled>
+                                    Customize & Add to cart
+                                    </button></div>
+                                    <div><button  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored admin-edit" style = "width:100%;" id = `+itemid+`>
+                                        Edit item
+                                    </button></div>
+                                </div>`;
+                            }
+                            else
+                            {
+                                s += `
+                                <div class="input-group">
+                                    <input type="button" value="-" class="button-minus" data-field="quantity">
+                                    <input type="number" step="1" max="`+invqty+`" value="1" name="quantity" class="quantity-field">
+                                    <input type="button" value="+" class="button-plus" data-field="quantity">
+                                </div>
+                                <div><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent addtocart" style = "width:100%;margin-bottom: 10px;" id = `+itemid+`>
                                 Customize & Add to cart
-                                </button></div>
-                                <div><button  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored admin-edit" style = "width:100%;" id = `+itemid+`>
-                                    Edit item
-                                </button></div>
-                            </div>`;
+                                </button></div>`;
+                            }
                         }
                         else
                         {
-                            s += `
-                            <div class="input-group">
-                                <input type="button" value="-" class="button-minus" data-field="quantity">
-                                <input type="number" step="1" max="`+invqty+`" value="1" name="quantity" class="quantity-field">
-                                <input type="button" value="+" class="button-plus" data-field="quantity">
-                            </div>
-                            <div><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent addtocart" style = "width:100%;margin-bottom: 10px;" id = `+itemid+`>
-                            Customize & Add to cart
-                            </button></div>`;
+                            if(usertype == "admin")
+                            {
+                                s += `
+                                <div><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" style = "width:100%;margin-bottom: 10px;cursor:not-allowed;" disabled>
+                                    Customize & Add to cart
+                                    </button></div>
+                                    <div><button  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored admin-edit" style = "width:100%;" id = `+itemid+` disabled>
+                                        Edit item
+                                    </button></div>
+                                </div>`;
+                            }
+                            else
+                            {
+                                s += `
+                                <div class="input-group">
+                                    <input type="button" value="-" class="button-minus" data-field="quantity" disabled>
+                                    <input type="number" step="1" max="`+invqty+`" value="1" name="quantity" class="quantity-field" disabled>
+                                    <input type="button" value="+" class="button-plus" data-field="quantity" disabled>
+                                </div>
+                                <div><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent addtocart" style = "width:100%;margin-bottom: 10px;" id = `+itemid+` disabled>
+                                Customize & Add to cart
+                                </button></div>`;
+                            }
                         }
+                        
                         var htmlObject = $(s); 
                         $(htmlObject).appendTo(".products");
                     }
@@ -335,30 +366,61 @@ function showProducts(caller,start,end,searchQuery,category,special)
                             <div class = "product-title gotu" style="width: 225px;">`+itemname+`</div>
                             <div class = "product-price gotu" style="width: auto;">$ `+rate+`<span class = "tooltip favourite">Our Special</span><span class="material-icons favourite" >favorite</span></div>
                             <div class = "product-desc">`+description+`</div>`;
-                            if(usertype == "admin")
+                            if(canSeeMenu == "1")
                             {
-                                s += `
-                                <div><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" style = "width:100%;margin-bottom: 10px;cursor:not-allowed;" disabled>
-                                Customize & Add to cart
-                                </button></div>
-                                <div><button  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored admin-edit" style = "width:100%;" id = `+itemid+`>
-                                    Edit item
-                                </button></div>
-                            </div>
-                            `;
+                                if(usertype == "admin")
+                                {
+                                    s += `
+                                    <div><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" style = "width:100%;margin-bottom: 10px;cursor:not-allowed;" disabled>
+                                    Customize & Add to cart
+                                    </button></div>
+                                    <div><button  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored admin-edit" style = "width:100%;" id = `+itemid+`>
+                                        Edit item
+                                    </button></div>
+                                </div>
+                                `;
+                                }
+                                else
+                                {
+                                    s += `
+                                    <div class="input-group">
+                                        <input type="button" value="-" class="button-minus" data-field="quantity" disabled>
+                                        <input type="number" step="1" max="10" value="1" name="quantity" class="quantity-field">
+                                        <input type="button" value="+" class="button-plus" data-field="quantity">
+                                    </div>
+                                    <div><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent addtocart" style = "width:100%;margin-bottom: 10px;" id = `+itemid+`>
+                                    Customize & Add to cart
+                                    </button></div>`;
+                                }
                             }
                             else
                             {
-                                s += `
-                                <div class="input-group">
-                                    <input type="button" value="-" class="button-minus" data-field="quantity" disabled>
-                                    <input type="number" step="1" max="10" value="1" name="quantity" class="quantity-field">
-                                    <input type="button" value="+" class="button-plus" data-field="quantity">
+                                if(usertype == "admin")
+                                {
+                                    s += `
+                                    <div><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" style = "width:100%;margin-bottom: 10px;cursor:not-allowed;" disabled>
+                                    Customize & Add to cart
+                                    </button></div>
+                                    <div><button  class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored admin-edit" style = "width:100%;" id = `+itemid+` disabled>
+                                        Edit item
+                                    </button></div>
                                 </div>
-                                <div><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent addtocart" style = "width:100%;margin-bottom: 10px;" id = `+itemid+`>
-                                Customize & Add to cart
-                                </button></div>`;
+                                `;
+                                }
+                                else
+                                {
+                                    s += `
+                                    <div class="input-group">
+                                        <input type="button" value="-" class="button-minus" data-field="quantity" disabled>
+                                        <input type="number" step="1" max="10" value="1" name="quantity" class="quantity-field" disabled>
+                                        <input type="button" value="+" class="button-plus" data-field="quantity" disabled>
+                                    </div>
+                                    <div><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent addtocart" style = "width:100%;margin-bottom: 10px;" id = `+itemid+` disabled>
+                                    Customize & Add to cart
+                                    </button></div>`;
+                                }
                             }
+                            
                         var htmlObject = $(s); 
                         $(htmlObject).appendTo(".products");
                         //$(".main-card").appendT(htmlObject);
@@ -595,8 +657,25 @@ function editProduct(id)
             var rate = edit[0]['rate'];
             var description = edit[0]['description'];
             var file = edit[0]['imagepath'];
-            var special = edit[0]['special'];
+            special = edit[0]['special'];
             deleteitem = edit[0]['deleteitem'];
+
+            if(special == 1)
+            {
+                document.querySelector('.special').MaterialCheckbox.check();
+            }
+            else
+            {
+                document.querySelector('.special').MaterialCheckbox.uncheck();
+            }
+            if(deleteitem == 1)
+            {
+                document.querySelector('.delete').MaterialCheckbox.check();
+            }
+            else
+            {
+                document.querySelector('.delete').MaterialCheckbox.uncheck();
+            }
             
             $("#special").change(function(){
                 if ($(this).is(':checked')) {
@@ -617,22 +696,7 @@ function editProduct(id)
                 }
             });
 
-            if(special == 1)
-            {
-                document.querySelector('.special').MaterialCheckbox.check();
-            }
-            else
-            {
-                document.querySelector('.special').MaterialCheckbox.uncheck();
-            }
-            if(deleteitem == 1)
-            {
-                document.querySelector('.delete').MaterialCheckbox.check();
-            }
-            else
-            {
-                document.querySelector('.delete').MaterialCheckbox.uncheck();
-            }
+            
             $("#itemname").val(itemname);
             $("#invqty").val(invqty);
             $("#category").val(category);
@@ -640,8 +704,6 @@ function editProduct(id)
             $("#description").val(description);
             $("#itemid").val(id).prop("disabled", true);
             $("#uploadFile").val(itemname+".png");
-            //alert($("#uploadFile").val());
-            //$("#product-preview").remove();
             $(".centered").remove();
             $("#product-preview").attr("src",file.substring(1));
             $("#product-preview").css("filter","none");
@@ -649,9 +711,7 @@ function editProduct(id)
 
             document.getElementById("uploadBtn").onchange = function () {
                  document.getElementById("uploadFile").value = this.files[0].name;
-                 //$("#product-preview").remove();
                  $(".centered").remove();
-                 //$(".productimage").appendChild('<img id="product-image" src="#" alt="Product-Image">');
                  $("[for=uploadfile]").text(" ");
              };
 
@@ -671,16 +731,16 @@ function editProduct(id)
                 readURL(this);
             });
 
-            spl = 0;
+            // spl = 0;
 
-            $("#special").change(function(){
-                if ($(this).is(':checked')) {
-                        spl = 1;
-                }
-                else {
-                        spl = 0;
-                }
-            });
+            // $("#special").change(function(){
+            //     if ($(this).is(':checked')) {
+            //             spl = 1;
+            //     }
+            //     else {
+            //             spl = 0;
+            //     }
+            // });
             $(".updatebtn").on("click", function(e){
                 updateInventory(e);
             })
@@ -717,7 +777,6 @@ function editProduct(id)
         processData: false,
         data: formData,
         success: function(data){
-            alert(data);
             if(data == "1")
             {
                 $(".updatebtn").html("Product successfully updated to inventory");
