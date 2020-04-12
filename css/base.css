@@ -44,6 +44,10 @@ html
 {
     font-family: 'Gotu', sans-serif;
 }
+.spicy-rice
+{
+    font-family: 'Spicy Rice', cursive;
+}
 a
 {
     text-decoration: none;
@@ -132,7 +136,7 @@ a
     border: none;
     font-size: 16px;
     color: #FFFFFF;
-    background-color: rgba(197, 196, 196, 0.616);
+    background-color: rgba(255, 255, 255, 0.445);
     padding: 0px 35px 0px 70px;
     height: 40px;
     line-height: 40px; /* TODO: This was recommended for cross browser compatability of input height, check if its actually needed in modern browsers */
