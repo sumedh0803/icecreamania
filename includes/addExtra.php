@@ -2,7 +2,7 @@
 include("../conn.php");
 
 $eid = $_REQUEST['eid'];
-$ename = $_REQUEST['ename'];
+$ename = addslashes($_REQUEST['ename']);
 $category1 = $_REQUEST['category1'];
 $rate = $_REQUEST['rate'];
 
