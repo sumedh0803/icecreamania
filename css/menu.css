@@ -6,11 +6,6 @@
     border-radius: 5px;
     overflow: hidden;
     padding: 10px;
-  
-  transition: 0.3s;
-  height: 100%;
-  background-color: rgb(252, 250, 250);
-  border-radius: 5px;
 }
 
 .bg-gradient
