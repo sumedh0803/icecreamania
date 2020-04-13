@@ -186,7 +186,7 @@ else
                         <div class = "bg-gradient" style="padding:5%">
                             <div class="card main-card">
                                 <div class = "pagination" style="margin: 10px 0px;"></div>
-                                <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active spinner"></div>
+                                <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active spinner" style = "display:block"></div>
                                 <div class = "products" style="overflow: hidden;">
                                   
                                 </div>

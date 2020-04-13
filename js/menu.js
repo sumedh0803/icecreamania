@@ -1,17 +1,83 @@
 $(document).ready(function(){
-         
+    //Check if admin is logged in. If yes, then show the "ADMINPANEL" button on nav bar
     if(usertype == "admin")
     {
         $("#adminpanel").on("click", function() {
             window.location.href = "adminpanel.php?userid="+userid+"&username="+username;
         });
     }
-    else{
-        
+    else
+    {
         $("#adminpanel").hide();
         $(".mdh-expandable-search").css("margin-left","50px");
     }
+    //========================================================================//
 
+    //===Check if URL has any searchQueries===//
+    let searchParams = new URLSearchParams(window.location.search)
+    if(searchParams.has('searchQuery'))
+    {
+        showProducts("s",null,null,searchParams.get('searchQuery'),null); //call showProducts and pass the search query
+        $("#search-bar").val(searchParams.get('searchQuery')); //fill the search bar w/ search query
+        $(".clear").css("visibility","visible"); // clear is the X button
+
+    }
+    else
+    {
+        //if no search params are passed, show all products
+        showProducts("l",0,12,null,null);   
+        //the ajax call counts the number of products recieved at the beginning
+        $.ajax({
+            url: "./includes/displayMenu.php?getCount=1&usertype="+usertype,
+            success: function(data){
+                makePagination(parseInt(data));
+            },
+            error: function(data){
+                console.log("Error: "+data);
+            }
+        });
+    }
+    //====Functions related to search bar===//
+    //This ajax call populates the suggestion box with names containing the searchQuery
+    $("#search-bar").on("keyup",function(){
+        if($(this).val() == "")
+            $(".clear").css("visibility","hidden");
+        else
+            $(".clear").css("visibility","visible");
+        $(".sugg-box").show();
+        var searchQuery = $(this).val();
+        $.ajax({
+            url: "./includes/searchResults.php",
+            data: { searchQuery: searchQuery,
+                    usertype: usertype},
+            success: function(data){
+                items = data.split(",")
+                $(".sugg-box").empty();
+                for(i = 0; i < items.length; i++)
+                {
+                    var li = document.createElement("li");
+                    $(li).attr("id",i+1);
+                    $(li).attr("class","search-item");
+                    $(li).attr("onclick","search('"+items[i]+"')");
+                    $(li).text(items[i]);
+                    $(".sugg-box").append(li);
+                }
+            }
+        });
+    });
+    $(".clear").on("click",function(){
+        window.location = window.location.href.split("?")[0];
+    });
+
+    $('.search').click(function(event){
+        searchQuery = $('#search-bar').val();
+        search(searchQuery)
+        
+    });
+    //========================================================================//
+    
+
+    //====Declare the dialog boxes and handle click on their close buttons====//
     customize = $("#customize");
     edit = $("#edit");
     $("#dialog-close").click(function (){
@@ -22,11 +88,10 @@ $(document).ready(function(){
         edit.hide();
         $(".mdl-layout__container").removeClass("blur-filter");
     });
+    //========================================================================//
 
-    $(".favourite").on("mouseout",function(){
-        $(".tooltip").css("display","none");
-    });
 
+    //====Functions to handle button click inside Customization Dialog box====//
     $('.button-plus-cust').on('click', function(e) {
         parent = $(this).parent();
         qtyField = $(this).siblings(".quantity-field-cust");
@@ -71,64 +136,32 @@ $(document).ready(function(){
         } 
         
     });
+    //========================================================================//
 
+    //====Function to handle click on Ice-Creamania's Specials====//
     $(".spl-select").on("click",function(){
         if($(this).hasClass("special-selected"))
         {
             $(this).removeClass("special-selected"); 
-            window.location.href = "menu.php";
+            window.location.href = "menu.php"; //if specials is unselected, refresh the page
         }
         else
         {
             $(".pagination-container").hide();
             $(this).addClass("special-selected");
-            showProducts("sp",null,null,null,null)
-        }
-        
-    })
-    
-    let searchParams = new URLSearchParams(window.location.search)
-    if(searchParams.has('searchQuery'))
-    {
-        //alert(searchParams.get('searchQuery'));
-        showProducts("s",null,null,searchParams.get('searchQuery'),null);
-        $("#search-bar").val(searchParams.get('searchQuery'));
-        $(".clear").css("visibility","visible");
-
-    }
-    else
-    {
-        showProducts("l",0,12,null,null);   
-   
-        $.ajax({
-            url: "./includes/displayMenu.php?getCount=1&usertype="+usertype,
-            success: function(data){
-                //var pages = Math.ceil(parseInt(data) / 12);
-                makePagination(parseInt(data));
-            },
-            error: function(data){
-                console.log("Error: "+data);
-            }
-        });
-    }
-
-    $(".clear").on("click",function(){
-        window.location = window.location.href.split("?")[0];
+            showProducts("sp",null,null,null,null)//if specials is selected, call showProducts()
+        }  
     });
+    //========================================================================//
 
-    $('.search').click(function(event){
-        searchQuery = $('#search-bar').val();
-        search(searchQuery)
-        
-    });
     
+    //========Functions to handle categories=======//
     categories = new Array();
     $(".category-list>a").on("click", function(e){
         e.preventDefault();
         $(".products").empty();
         $(this).toggleClass("category-selected");
         $(this).css("color","black");
-        //alert($(this).text());
         if($.inArray($(this).text() , categories ) > -1)
         {
             //elem exists
@@ -145,10 +178,8 @@ $(document).ready(function(){
         }
         console.log(categories);
         showProducts("c",null,null,null,categories);
-
     });
     $(".category-list>a").on("mouseover",function(){
-        
         $(this).css("cursor","pointer");
     });
     $(".category-list>a").on("mousedown",function(){
@@ -163,41 +194,10 @@ $(document).ready(function(){
         e.preventDefault();
         $(this).toggleClass("category-selected");
     });
-   
-    $(".spinner").css("display","block");
+    //========================================================================//
    
     
-
-    $("#search-bar").on("keyup",function(){
-        if($(this).val() == "")
-            $(".clear").css("visibility","hidden");
-        else
-            $(".clear").css("visibility","visible");
-        $(".sugg-box").show();
-        var searchQuery = $(this).val();
-        console.log(searchQuery);
-        $.ajax({
-            url: "./includes/searchResults.php",
-            data: { searchQuery: searchQuery,
-                    usertype: usertype},
-            success: function(data){
-                items = data.split(",")
-                $(".sugg-box").empty();
-                for(i = 0; i < items.length; i++)
-                {
-                    var li = document.createElement("li");
-                    $(li).attr("id",i+1);
-                    $(li).attr("class","search-item");
-                    $(li).attr("onclick","search('"+items[i]+"')");
-                    $(li).text(items[i]);
-                    $(".sugg-box").append(li);
-                }
-            }
-    });
-    });
-    // $("#search-bar").on("blur",function(){
-    //     $(".sugg-box").hide();
-    // });
+    //======
     $("#addtocart").on("click",function(){
         sibling = $(this).siblings(".input-group");
         qtyField = sibling.find(".quantity-field-cust");
@@ -222,13 +222,13 @@ $(document).ready(function(){
     });
 });
 
-
+//The function takes searchQueries and passes it to showProducts to display only specific products
 function search(searchQuery)
 {
     showProducts("s",null,null,searchQuery,categories);
-    //window.location.href = "menu.php?searchQuery="+searchQuery+"&usertype="+usertype;
 }
 
+//Function is called when page number is clicked. elem is the page number <li>
 function load(elem)
 {
     $(".spinner").css("display","block");
@@ -236,16 +236,24 @@ function load(elem)
     var pgNo = $(elem).attr("id");
     var end = pgNo * 12;
     var start = end - 12;
-    console.log(start);
-    console.log(end);
     showProducts("p",start,end,null,categories);
     $(".active").removeClass("active");
     $(elem).addClass("active");
 }
 
-function showProducts(caller,start,end,searchQuery,category,special)
+//This function is responsible for showing all the products. 
+//Not all params are passed in each function all. depending on the caller, some params
+//may be null. 
+/**
+ * caller: function is being called from search bar, on page load, categories, specials, pagination
+ * start and end: starting and ending index of the sql results. used only when called from pagination
+ * searchQuery: used only when called from the search bar or suggestion box.
+ * category: used when category is selected (along with search bar, if results are to be combined)
+ */
+function showProducts(caller,start,end,searchQuery,category)
 {
-    console.log(caller, start, end, searchQuery,category, special);
+    //in data, we check each param for null. if null, we send a blank string to php. 
+    //in php, we check which params are blank and fire sql queries accordingly
     $.ajax({
         url: "./includes/displayMenu.php",
         data: { start: start == null? "" : start,
@@ -262,22 +270,26 @@ function showProducts(caller,start,end,searchQuery,category,special)
             var product = JSON.parse(data);
             if(product.length == 0)
             {
+                //No products found
                 $(".pagination-container").hide();
                 $(".products").append("<div class = 'gotu' style = 'text-align: center;font-size: xx-large;padding: 20px 0px'>No products found</div>");
             }
             else
             {
+                //New pagination formed only if function call is made from page load, categories or search results
                 if(caller == "l" || caller == "c"  || caller == "s" )
                     makePagination(product.length);
                 if(caller == "sp")
                 {
+                    //No pagination if special items are shown. All products shown on same page.
                     limit = product.length;
                 }
                 else
                 {
                     limit = (product.length <= 12) ? product.length : 12;
                 }
-                for(var i = 0; i < limit ; i++) {
+                for(var i = 0; i < limit ; i++) 
+                {
                     var itemid = product[i]['itemid'];
                     var itemname = product[i]['itemname'];
                     var category = product[i]['category'];
@@ -288,6 +300,7 @@ function showProducts(caller,start,end,searchQuery,category,special)
                     var invqty = parseInt(product[i]['invqty']);
                     if(special == "0")
                     {
+                        //Heart is not shown in product cards.
                         var s = `
                         <div class = "product-container">
                         <div><span class="product-category" style="position: absolute;">`+category+`</span></div>
@@ -299,6 +312,7 @@ function showProducts(caller,start,end,searchQuery,category,special)
                         <div class = "product-desc" style="width: 225px;overflow: hidden; display:-webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;">`+description+`</div>`;
                         if(canSeeMenu == "1")
                         {
+                            //Add to card and edit item Buttons are enabled
                             if(usertype == "admin")
                             {
                                 s += `
@@ -325,6 +339,7 @@ function showProducts(caller,start,end,searchQuery,category,special)
                         }
                         else
                         {
+                            //Add to card and edit item Buttons are enabled
                             if(usertype == "admin")
                             {
                                 s += `
@@ -355,6 +370,7 @@ function showProducts(caller,start,end,searchQuery,category,special)
                     }
                     else
                     {
+                        //Heart is shown in product cards.
                         var s = `
                         <div class = "product-container">
                             <div>
@@ -425,7 +441,8 @@ function showProducts(caller,start,end,searchQuery,category,special)
                         $(htmlObject).appendTo(".products");
                         //$(".main-card").appendT(htmlObject);
                     }
-                }
+                } //for loop ends here
+                //These functions are set on plus, minus, add to cart and edit item buttons on product cards.
                 $('.input-group').on('click', '.button-plus', function(e) {
                     incrementValue(e,invqty);
                 });
@@ -442,17 +459,14 @@ function showProducts(caller,start,end,searchQuery,category,special)
                     editProduct(id);
                 });
             }
-            
-          
         },
         error: function(data){
             console.log("Error: "+data);
-        }
-        
-});
-
+        }    
+    });
 }
 
+//Function calculates number of pages
 function makePagination(itemCount)
 {
     pages = Math.ceil(itemCount / 12);
@@ -473,11 +487,11 @@ function makePagination(itemCount)
     $("li#1").addClass("active");
 }
 
+//Increments value in the quantity field.
 function incrementValue(e,invqty) 
 {
     e.preventDefault();
-    
-     var fieldName = $(e.target).data('field');
+    var fieldName = $(e.target).data('field');
     var parent = $(e.target).closest('div');
     var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val());
     if(currentVal >= 1)
@@ -497,14 +511,15 @@ function incrementValue(e,invqty)
             parent.find(".button-plus").val("+").css('cursor','not-allowed');
         }
     }
-  }
-  
+}
+ 
+//Decrements value in the quantity field.
 function decrementValue(e,invqty) {
     e.preventDefault();
     var fieldName = $(e.target).data('field');
     var parent = $(e.target).closest('div');
     var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
-  
+    
     if(currentVal <= invqty)
     {
         parent.find(".button-plus").val("+").css('background-color','#00c853');
@@ -524,8 +539,7 @@ function decrementValue(e,invqty) {
 }
 
 function addToCart(qty,id)
-{
-    // customize.find("#prodId").text(id);
+{   //fetches the products with the id and also sets the quantity
     extraitems = new Array();
     $(".mdl-layout__container").addClass("blur-filter");
     $.ajax({
@@ -575,6 +589,7 @@ function addToCart(qty,id)
             $(".prod-extra").empty();
             if(extras.length > 0)
             {
+                //Extras available for this category
                 $(".prod-extra").append(`<div style = "border-top:1px solid #aaa;font-size:24px;line-height:30px;">Make your dessert even more tastier with our unique toppings!</div>`);
                 for(i = 0; i<extras.length;i++)
                 {
@@ -610,9 +625,11 @@ function addToCart(qty,id)
             }
             else
             {
+                //No extras available for this category.
                 $(".prod-extra").append(`<div class = "" style = "border-top:1px solid #aaa;font-size:24px;padding:1%;line-height: 30px;">This dessert doesn't need any toppings! It's already awesome!</div>`);
             }
 
+            //Function to add extras in array
             $(".extras").on("click",function(){
                 eid = $(this).attr("id");
                 if(extraitems.includes(eid))
@@ -625,9 +642,7 @@ function addToCart(qty,id)
                 }
                 
             });
-
-            customize.fadeIn(100);
-            
+            customize.fadeIn(100);   
         },
         error: function (error){
             console.log(error);
@@ -730,17 +745,6 @@ function editProduct(id)
             $("#uploadBtn").change(function() {
                 readURL(this);
             });
-
-            // spl = 0;
-
-            // $("#special").change(function(){
-            //     if ($(this).is(':checked')) {
-            //             spl = 1;
-            //     }
-            //     else {
-            //             spl = 0;
-            //     }
-            // });
             $(".updatebtn").on("click", function(e){
                 updateInventory(e);
             })
