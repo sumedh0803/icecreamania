@@ -350,7 +350,8 @@ $(document).ready(function(){
                     phone: phone,
                     city: city,
                     email: email,
-                    pwd: pwd},
+                    pwd: pwd,
+                    gender: $('input[type=radio][name=gender]:checked').val() },
             success: function (data){
                 console.log(data);
                 $(".progress").css("visibility","hidden");

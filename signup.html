@@ -126,6 +126,17 @@
                     <label class="mdl-textfield__label" for="pin">Pin Code</label>
                     <span id = "ePin" class="mdl-textfield__error"></span>
                   </div>
+                  <div style="width: 100%;padding:20px 0;">
+                    <span style = "width: 25%;font-size:16px;float: left;">Gender:</span>
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="male" style = "width:22%;margin-right: 10%;">
+                      <input type="radio" id="male" class="mdl-radio__button" name="gender" value="m">
+                      <span class="mdl-radio__label">Male</span>
+                    </label>
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="female" style = "width:22%">
+                      <input type="radio" id="female" class="mdl-radio__button" name="gender" value="f">
+                      <span class="mdl-radio__label">Female</span>
+                    </label>
+                  </div>
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 49%;margin-right: 5px;;">
                     <input class="mdl-textfield__input" type="email" id="email">
                     <label class="mdl-textfield__label" for="email">Email</label>
@@ -143,13 +154,12 @@
                         <li id="number" class="invalid">At least <strong>one number</strong></li>
                         <li id="length" class="invalid">Be at least <strong>8 characters</strong></li>
                     </ul>
-                </div>
+                  </div>
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 48%;margin-right: 5px;;">
                     <input class="mdl-textfield__input" type="email" id="email-conf">
                     <label class="mdl-textfield__label" for="email-conf">Confirm Email</label>
                     <span id = "eEmailC" class="mdl-textfield__error"></span>
                   </div>
-                  
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 49%;">
                     <input class="mdl-textfield__input" type="password" id="pwd-conf">
                     <label class="mdl-textfield__label" for="pwd-conf">Confirm Password</label>
