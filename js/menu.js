@@ -198,7 +198,7 @@ $(document).ready(function(){
    
     
     //======This function will finally send data to the cart.======//
-    //Right now it sends data to addToCart.php which will be edited by Tanuj.
+    //Right now it sends data to addToCart.php (which just echoes the data back) which will be edited by Tanuj.
     $("#addtocart").on("click",function(){
         sibling = $(this).siblings(".input-group");
         qtyField = sibling.find(".quantity-field-cust");
