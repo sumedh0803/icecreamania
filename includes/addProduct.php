@@ -12,6 +12,7 @@ $special = $_REQUEST['special'];
 
 $target_dir = "../productImages/";
 $target_file = $target_dir . $itemid . strstr(basename($_FILES["file"]["name"]),".");
+//echo "Filename: ". $itemid . strstr(basename($_FILES["file"]["name"]),"."); 
 
 //Check if image file is a actual image or fake image
 $check = getimagesize($_FILES["file"]["tmp_name"]);
@@ -28,6 +29,5 @@ if($check !== false) {
 else
 {
     echo "0";
-}
 
 ?>
