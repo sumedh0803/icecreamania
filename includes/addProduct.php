@@ -13,6 +13,12 @@ $special = $_REQUEST['special'];
 $target_dir = "../productImages/";
 $target_file = $target_dir . $itemid . strstr(basename($_FILES["file"]["name"]),".");
 
+//echo "Filename: ". $itemid . strstr(basename($_FILES["file"]["name"]),"."); 
+
+//echo $itemname, $invqty, $category, $rate, $description,$_FILES["file"]["name"];
+
+$uploadOk = 1;
+//$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 //Check if image file is a actual image or fake image
 $check = getimagesize($_FILES["file"]["tmp_name"]);
 if($check !== false) {
@@ -28,6 +34,13 @@ if($check !== false) {
 else
 {
     echo "0";
+<<<<<<< HEAD
 }
 
+=======
+    $uploadOk = 0;
+}
+
+
+>>>>>>> adminpanel
 ?>
