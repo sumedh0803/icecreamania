@@ -197,12 +197,13 @@ $(document).ready(function(){
     //========================================================================//
    
     
-    //======
+    //======This function will finally send data to the cart.======//
+    //Right now it sends data to addToCart.php which will be edited by Tanuj.
     $("#addtocart").on("click",function(){
         sibling = $(this).siblings(".input-group");
         qtyField = sibling.find(".quantity-field-cust");
-        qty = parseInt(qtyField.val()); 
-        extraStr = extraitems.join(",");
+        var qty = parseInt(qtyField.val()); 
+        var extraStr = extraitems.join(",");
         var itemid = $(this).attr("itemid");
         $.ajax({
             url: "./includes/addToCart.php",
@@ -212,8 +213,9 @@ $(document).ready(function(){
                 extras: extraStr
             },
             success: function(data){
+                //if item successfully added to cart, close the dialog box
+                //customize.close();
                 console.log(data);
-
             },
             error: function (error){
                 console.log(error);
@@ -242,7 +244,7 @@ function load(elem)
 }
 
 //This function is responsible for showing all the products. 
-//Not all params are passed in each function all. depending on the caller, some params
+//Not all params are passed in each function call. depending on the caller, some params
 //may be null. 
 /**
  * caller: function is being called from search bar, on page load, categories, specials, pagination
