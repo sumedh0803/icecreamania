@@ -1,4 +1,4 @@
-.main-card, .main-card1
+.main-card
 {   
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
@@ -11,7 +11,7 @@
 .bg
 {
     padding: 5%;
-    overflow: hidden; 
+    overflow: auto; 
 }
 
 .userphoto
@@ -54,5 +54,26 @@
 #myprofile
 {
     background-color: #f8bbd0;
+}
+
+#add
+{
+    cursor: pointer;
+}
+
+.mdl-data-table__cell--non-numeric, .numeric
+{
+    text-align: center;
+}
+
+.main-card1
+{
+    padding-right: 5%;
+    padding-bottom: 5%;
+    padding-left: 1%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    background-color: rgb(252, 250, 250);
+    border-radius: 5px;
 }
 
