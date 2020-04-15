@@ -168,54 +168,57 @@ function loadtransactions(userid)
             console.log(transdata);
             if(transdata.length > 0)
             {
-                var fullname = username[0]+lname[0];
-                var userid = transdata[0]['t_uid'];
-                var timestamp = transdata[0]['Timestamp'];
-                timestamp = timestamp.split(' ');
-                var date = timestamp[0].replace("-","");
-                var finaldate = date.replace("-","");
-                var transid = fullname+userid+finaldate;
-
-                var t = `<table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp" style="margin-left: 2%; width: 50%; border-collapse: collapse;" border = 1>
+                var t = `<table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp" style="margin: 2% auto 5%; border-collapse: collapse;" border = 1>
                         <h3 class="gotu" style="margin-left: 2%;">My Transactions:</h3>
                         <thead>
                             <tr>
                             <th class="mdl-data-table__cell--non-numeric" style="text-align:center;">Transaction Reference#</th>
-                            <th class="mdl-data-table__cell--non-numeric" style="text-align:center;">Itemname</th>
-                            <th class="mdl-data-table__cell--non-numeric" style="text-align:center;">Category</th>
-                            <th style="text-align:center;">Quantity</th>
-                            <th class="mdl-data-table__cell--non-numeric" style="text-align:center;">Extraname</th>
-                            <th class="mdl-data-table__cell--non-numeric" style="text-align:center;">Timestamp</th>
-                            <th style="text-align:center;">Total Amount</th>
+                            <th class="mdl-data-table__cell--non-numeric" style="text-align:center;">Date & Time</th>
+                            <th class="mdl-data-table__cell--non-numeric" style="text-align:center;">Product Details</th>
+                            <th style="text-align:center;">Total Amount</th> 
                             </tr>
                         </thead>`;
+
+                        for(i = 0; i < transdata.length; i++)
+                        {
+                            var fullname = username[0]+lname[0];
+                            var userid = transdata[i]['t_uid'];
+                            var timestamp = transdata[i]['time'];
+                            timestamp = timestamp.split(' ');
+                            var date = timestamp[0].replace("-","");
+                            var finaldate = date.replace("-","");
+                            var transid = fullname+userid+finaldate;
+
+                            t += `<tr>
+                                     <td class="mdl-data-table__cell--non-numeric" style="text-align:center;"><b>#`+transid+`</b></td>
+                                     <td class="mdl-data-table__cell--non-numeric" style="text-align:center;">`+transdata[i]['time']+`</td>`;
+
+                            orders = transdata[i]['orders'];
+                            orderitems = "";
+                            for(j = 0; j < orders.length; j++)
+                            {
+                                if(orders[j]['extras'] == false)
+                                {
+                                    orders[j]['extras'] = "No extras";
+                                }
+                                if(j == orders.length - 1)
+                                    orderitems += orders[j]['category']+" - ("+orders[j]['quantity']+") <b>"+orders[j]['itemname']+"</b> <i>["+orders[j]['extras']+"]</i>";
+                                else
+                                    orderitems += orders[j]['category']+" - ("+orders[j]['quantity']+") <b>"+orders[j]['itemname']+" </b> <i>["+orders[j]['extras']+"]</i>, "+"<br>";
+                            }
+
+                            t += `
+                                <td class="mdl-data-table__cell--non-numeric" style="text-align:center;">`+orderitems+`</td>
+                                <td class="numeric" style="text-align:center;">$`+transdata[i]['price']+`</td></tr>`;
+                        }
+
+                        t += `</table>`;     
+                        $(".main-card1").html(t);
             }
             else
             {
                 $(".main-card1").html(`<h3>No Transaction history available!</h3>`);
             }
-            
-            for(i = 0; i<transdata.length;i++)
-            {
-                if(transdata[i]['Extras'] == null)
-                {
-                    transdata[i]['Extras'] = "--";
-                }
-                    t += `
-                            <tr>
-                            <td class="mdl-data-table__cell--non-numeric" style="text-align:center;">`+transid+`</td>
-                            <td class="mdl-data-table__cell--non-numeric" style="text-align:center;">`+transdata[i]['Item']+`</td>
-                            <td class="mdl-data-table__cell--non-numeric" style="text-align:center;">`+transdata[i]['Category']+`</td>
-                            <td class="numeric" style="text-align:center;">`+transdata[i]['Qty']+`</td>
-                            <td class="mdl-data-table__cell--non-numeric" style="text-align:center;">`+transdata[i]['Extras']+`</td>
-                            <td class="mdl-data-table__cell--non-numeric" style="text-align:center;">`+transdata[i]['Timestamp']+`</td>
-                            <td class="numeric" style="text-align:center;">$`+transdata[i]['Total']+`</td>
-                            </tr>`;
-                     
-            }
-                    t += `</table>`;
-            
-                $(".main-card1").html(t);
         },
         error: function (error){
             console.log(error);

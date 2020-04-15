@@ -68,9 +68,7 @@
 
 .main-card1
 {
-    padding-right: 5%;
-    padding-bottom: 5%;
-    padding-left: 1%;
+    padding: 1%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     background-color: rgb(252, 250, 250);
