@@ -135,10 +135,12 @@ else
       </form>        
 </dialog>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <div class = "top-bar gotu" style="padding-bottom: 5px;">🎉Earn 1 point for $1 spent! Redeem 100 points to get 1 free Sundae!🎉<span class="material-icons" style="float: right;right: 10px;position: relative;top: -2px;" id = "top-bar-close">close</span>
+    </div>
       <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
           <!-- Title -->
-          <a href = "index.html" style = "color:white;"><span class="mdl-layout-title">Ice Creamania!</span></a>
+          <a href = "index.php" style = "color:white;"><span class="mdl-layout-title">Ice Creamania!</span></a>
           <!-- Add spacer, to align navigation to the right (add spacer if no search bar)
           <div class="mdl-layout-spacer"></div> -->
           <div class="mdh-expandable-search mdl-cell--hide-phone" style="margin-left:190px;">
