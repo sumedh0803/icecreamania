@@ -22,7 +22,7 @@ $_SESSION["username"] = $_REQUEST['username'];
     <script src="./js/adminpanel.js"></script>
     
     <link rel="icon" href="./images/ice-cream-shop.png"/>
-    <title>Ice Creamania!</title>
+    <title>Ice Creamania! | Admin Panel</title>
 </head>
 <body>
 

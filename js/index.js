@@ -9,6 +9,7 @@ $(document).ready(function (){
         //Either user or admin has signed in
         $("#login").hide();
         $("#profile").show();
+        $("#signup").hide();
 
 
         if(usertype == "user")

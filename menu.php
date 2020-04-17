@@ -41,7 +41,8 @@ else
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/menu.css">
     <script src = "https://code.jquery.com/jquery-3.4.1.js"></script>
-    <title>Ice-Creamania | Menu</title>
+    <link rel="icon" href="./images/ice-cream-shop.png"/>
+    <title>Ice Creamania! | Menu</title>
     <script src="./js/menu.js"></script>
 </head>
 <body>

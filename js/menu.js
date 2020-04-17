@@ -1,28 +1,30 @@
 $(document).ready(function(){
-    $(".top-bar").slideDown("500");
-    $("#top-bar-close").on("click",function(){
-        $(".top-bar").slideUp("500")
-    })
-    .on("mouseover",function(){
-        $(this).css("cursor", "pointer")
-        .css("background","rgba(206, 206, 206, 0.22)")
-        .css("border-radius", "5px");
-
-    })
-    .on("mouseout",function(){
-        $(this).css("background","none");
-    });
+    
     //Check if admin is logged in. If yes, then show the "ADMINPANEL" button on nav bar
     if(usertype == "admin")
     {
         $("#adminpanel").on("click", function() {
             window.location.href = "adminpanel.php?userid="+userid+"&username="+username;
         });
+        $("#cart").hide();
     }
     else
     {
         $("#adminpanel").hide();
         $(".mdh-expandable-search").css("margin-left","50px");
+        $(".top-bar").slideDown("500");
+        $("#top-bar-close").on("click",function(){
+            $(".top-bar").slideUp("500")
+        })
+        .on("mouseover",function(){
+            $(this).css("cursor", "pointer")
+            .css("background","rgba(206, 206, 206, 0.22)")
+            .css("border-radius", "5px");
+
+        })
+        .on("mouseout",function(){
+            $(this).css("background","none");
+        });
     }
     //========================================================================//
 

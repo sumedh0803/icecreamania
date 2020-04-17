@@ -26,7 +26,8 @@ else
       usertype = "<?php echo $usertype; ?>"
     </script>
     <script src="./js/index.js"></script>
-    <title>Document</title>
+    <link rel="icon" href="./images/ice-cream-shop.png"/>
+    <title>Ice Creamania!</title>
 </head>
 <body>
     
@@ -118,7 +119,7 @@ else
                     <div class="sinout"><a href="signout.php">Sign Out</a></div>
                   </div> 
               </div>
-                <a class="mdl-button mdl-js-button gotu top-bar-btn" href = "signup.html">Sign Up</a>
+                <a class="mdl-button mdl-js-button gotu top-bar-btn" href = "signup.html" id = "signup">Sign Up</a>
             </nav>
           </div>
         </header>

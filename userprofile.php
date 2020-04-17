@@ -33,8 +33,9 @@ $row = mysqli_fetch_assoc($result);
         points = "<?php echo $row['points']; ?>"
         lname = "<?php echo $row['lname']; ?>"
     </script>
-    <script src="./js/userprofile.js"></script>    
-    <title>Ice Creamania | UserProfile</title>
+    <script src="./js/userprofile.js"></script> 
+    <link rel="icon" href="./images/ice-cream-shop.png"/>   
+    <title>Ice Creamania! | My Profile</title>
 </head>
 <body>
 
