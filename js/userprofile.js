@@ -164,6 +164,7 @@ function loadtransactions(userid)
         url: "./includes/loadtransactions.php",
         data: { userid: userid},
         success: function(data){
+            $(".spinner").css("display","none");
             var transdata = JSON.parse(data);
             console.log(transdata);
             if(transdata.length > 0)
@@ -191,7 +192,7 @@ function loadtransactions(userid)
 
                             t += `<tr>
                                      <td class="mdl-data-table__cell--non-numeric" style="text-align:center;"><b>#`+transid+`</b></td>
-                                     <td class="mdl-data-table__cell--non-numeric" style="text-align:center;">`+transdata[i]['time']+`</td>`;
+                                     <td class="mdl-data-table__cell--non-numeric" style="text-align:center;">`+timestamp[0]+" | "+timestamp[1]+`</td>`;
 
                             orders = transdata[i]['orders'];
                             orderitems = "";

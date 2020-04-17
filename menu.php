@@ -157,7 +157,13 @@ else
           <!-- Navigation. We hide it in small screens. -->
           <nav class="mdl-navigation mdl-layout--large-screen-only">
               <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "adminpanel">Adminpanel</button>
-              <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "profile" >Hello, <?php echo $username; ?></button>
+              <div class="userprofile">
+                  <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "profile" >Hello, <?php echo $username; ?></button>
+                  <div class="signout gotu" style="display: none;">
+                    <div class="myprofile"><a href="userprofile.php">My Profile</a></div>
+                    <div class="sinout"><a href="signout.php">Sign Out</a></div>
+                  </div> 
+              </div>
               <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "cart">Cart</button>
           </nav>
         </div>

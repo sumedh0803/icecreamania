@@ -13,6 +13,10 @@ $(document).ready(function(){
     }
     //========================================================================//
 
+    $("#profile").on("click", function() {
+        $(".signout").toggle();
+    });
+
     //===Check if URL has any searchQueries===//
     let searchParams = new URLSearchParams(window.location.search)
     if(searchParams.has('searchQuery'))

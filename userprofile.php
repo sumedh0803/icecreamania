@@ -58,7 +58,7 @@ $row = mysqli_fetch_assoc($result);
                 <div class="mdl-tooltip mdl-tooltip--large" data-mdl-for="tt1">
                 Earn 100 points to get a free Ice-cream!
                 </div>
-            <button class="mdl-button mdl-js-button gotu top-bar-btn">Sign Out</button>
+            <button class="mdl-button mdl-js-button gotu top-bar-btn"><a href="index.html">Sign Out</a></button>
         </nav>
         </div>
     </header>
@@ -148,6 +148,7 @@ $row = mysqli_fetch_assoc($result);
                                               </form>
                                         </div>
                                         <div class="card main-card1" style="display: none;">
+                                            <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active spinner" style = "display:block"></div>
                                                 <!-- Table dyanamically created in JS -->
                                         </div>
                                     </div>
