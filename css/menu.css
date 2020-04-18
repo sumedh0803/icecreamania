@@ -146,7 +146,7 @@
 .search-item:hover
 {
     background-color: #808080a9;
-    
+    cursor: pointer;
     font-family: 'Gotu', sans-serif;
 }
 .clear

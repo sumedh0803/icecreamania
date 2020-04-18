@@ -186,12 +186,16 @@ function loadtransactions(userid)
                             var userid = transdata[i]['t_uid'];
                             var timestamp = transdata[i]['time'];
                             timestamp = timestamp.split(' ');
-                            var date = timestamp[0].replace("-","");
-                            var finaldate = date.replace("-","");
-                            var transid = fullname+userid+finaldate;
+                            var date = timestamp[0].replace("-", "");
+                            var date1 = date.replace("-", "");
+                            var finaldate = date1.substring(4,9);
+                            var time = timestamp[1].replace(":","");
+                            var time1 = time.replace(":","");
+                            var finaltime = time1.replace(":","");
+                            var transid = fullname+userid+finaldate+finaltime;
 
                             t += `<tr>
-                                     <td class="mdl-data-table__cell--non-numeric" style="text-align:center;"><b>#`+transid+`</b></td>
+                                     <td class="mdl-data-table__cell--non-numeric" style="text-align:center;"><b>#`+transdata[i]['tid']+`</b></td>
                                      <td class="mdl-data-table__cell--non-numeric" style="text-align:center;">`+timestamp[0]+" | "+timestamp[1]+`</td>`;
 
                             orders = transdata[i]['orders'];
