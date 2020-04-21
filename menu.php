@@ -167,7 +167,8 @@ else
                     <div class="sinout"><a href="signout.php">Sign Out</a></div>
                   </div> 
               </div>
-              <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "cart">Cart</button>
+               <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "cart"><img src="./images/cartImage.png" id="cart-image"/>Cart</button>
+
           </nav>
         </div>
       </header>

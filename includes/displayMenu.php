@@ -165,10 +165,12 @@
             
             echo json_encode($data);
         }
+        
         else
         {
             echo "ERROR";
         }
 
-        }
+    }
+    $db -> close();
 ?>

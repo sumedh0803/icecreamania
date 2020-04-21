@@ -239,8 +239,13 @@ $(document).ready(function(){
         $(this).toggleClass("category-selected");
     });
     //========================================================================//
-   
-    
+
+    //======This function will go to cart page.======//
+    $("#cart").click(function(){
+        window.location.href = "/icecreamania/includes/cart.php";
+    });
+    //========================================================================//
+
     //======This function will finally send data to the cart.======//
     //Right now it sends data to addToCart.php (which just echoes the data back) which will be edited by Tanuj.
     $("#addtocart").on("click",function(){
@@ -258,8 +263,8 @@ $(document).ready(function(){
             },
             success: function(data){
                 //if item successfully added to cart, close the dialog box
-                //customize.close();
-                console.log(data);
+                $("#customize").hide();
+                $(".mdl-layout__container").removeClass("blur-filter");
             },
             error: function (error){
                 console.log(error);

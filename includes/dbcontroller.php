@@ -23,5 +23,13 @@
             }
             return $result;
         }
+
+        public function lastId(){
+            return mysqli_insert_id($this->conn);
+        }
+
+        public function close(){
+            mysqli_close($this -> conn);
+        }
     }
 ?>
