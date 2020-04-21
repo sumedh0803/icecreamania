@@ -31,18 +31,16 @@ else
         $_SESSION["userid"] = $row['uid']; //Spelling changed. Removed the camelcase
         $_SESSION["username"] = $row['fname'];
         
-        //Commented for time being. will uncomment later
-        // if(isset($_SESSION["userId"])){
-        //     $getCartDetails = $dbcontroller -> runQuery("Select inventory.itemid as itemId,qty,itemname,rate,imagepath from cart,inventory where inventory.itemid = cart.itemid and uid = '".$_SESSION["userid"]."'");
-        //     $cartList = array();
-        //     while($row =  mysqli_fetch_assoc($getCartDetails)){
-        //       $cartItem = array($row["itemId"] => array('itemname' => $row["itemname"], 'rate' => $row["rate"], 'imagepath' => $row["imagepath"], 'quantity' => $row["qty"]));
-        //       $cartList += $cartItem;
-        //     }
-        //     if(!empty($cartList) && count($cartList) > 0){
-        //       $_SESSION["cartItemsList"] = $cartList;
-        //     }
-        // }
+        
+        $getCartDetails = $dbcontroller -> runQuery("Select inventory.itemid as itemId,invqty,qty,itemname,rate,imagepath from cart,inventory where inventory.itemid = cart.itemid and uid = '".$row['uid']."'");
+        $cartList = array();
+        while($row =  mysqli_fetch_assoc($getCartDetails)){
+            $cartItem = array($row["itemId"] => array('itemname' => $row["itemname"], 'rate' => $row["rate"], 'imagepath' => $row["imagepath"], 'quantity' => $row["qty"], 'invqty' => $row["invqty"]));
+            $cartList += $cartItem;
+        }
+        if(!empty($cartList) && count($cartList) > 0){
+            $_SESSION["cartItemsList"] = $cartList;
+        }
 
         $data = array();
         array_push($data,"user",$row['uid'],$row['fname']);

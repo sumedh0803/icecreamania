@@ -174,3 +174,13 @@ a
     right: -7px;
     top: -8px;
   }
+
+.img-switcher-cart
+{
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+  

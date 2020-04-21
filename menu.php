@@ -158,7 +158,7 @@ else
           <nav class="mdl-navigation mdl-layout--large-screen-only">
               <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "adminpanel">Adminpanel</button>
               <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "profile" >Hello, <?php echo $username; ?></button>
-              <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "cart">Cart</button>
+              <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "cart"><img src="./images/cartImage.png" id="cart-image"/>Cart</button>
           </nav>
         </div>
       </header>

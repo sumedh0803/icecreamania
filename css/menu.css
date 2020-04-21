@@ -248,6 +248,10 @@ input::-webkit-inner-spin-button {
   left: -13px;
 }
 
+.red-button {
+    background-color: red;
+}
+
 input[type="number"] {
   -moz-appearance: textfield;
   -webkit-appearance: none;
@@ -426,3 +430,7 @@ input[type="number"] {
 {
     background-color: #f8bbd0;
 }
+
+.block-radio {
+    display: block;
+ }
