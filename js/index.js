@@ -1,8 +1,57 @@
 $(document).ready(function (){
-    window.location = "index.html?#";
+    window.location = "index.php?#";
     var dialog = $("#dialog");
     var dialogDelivery = $("#dialog-delivery");
     var dialogNoDelivery = $("#dialog-no-delivery");
+
+    if (username != "Guest")
+    {
+        //Either user or admin has signed in
+        $("#login").hide();
+        $("#profile").show();
+        $("#signup").hide();
+
+
+        if(usertype == "user")
+        {
+        
+            $("#profile").on("click", function() {
+                $(".signout").toggle();
+            });
+
+        }
+        else if(usertype == "admin")
+        {
+            $("#profile").on("click", function() {
+                $(".signout").toggle()
+                $(".myprofile").hide();
+            });
+        }
+
+    }
+    else
+    {
+        //No one is signed in
+        $("#profile").hide();
+        $("#login").show();
+
+        $(".top-bar").slideDown("500");
+        $("#top-bar-close").on("click",function(){
+            $(".top-bar").slideUp("500")
+        })
+        .on("mouseover",function(){
+            $(this).css("cursor", "pointer")
+            .css("background","rgba(206, 206, 206, 0.22)")
+            .css("border-radius", "5px");
+
+        })
+        .on("mouseout",function(){
+            $(this).css("background","none");
+        });
+    }
+
+    
+
     
     $("#login").click(function (){
         //dialog.show();

@@ -33,8 +33,9 @@ $row = mysqli_fetch_assoc($result);
         points = "<?php echo $row['points']; ?>"
         lname = "<?php echo $row['lname']; ?>"
     </script>
-    <script src="./js/userprofile.js"></script>    
-    <title>Ice Creamania | UserProfile</title>
+    <script src="./js/userprofile.js"></script> 
+    <link rel="icon" href="./images/ice-cream-shop.png"/>   
+    <title>Ice Creamania! | My Profile</title>
 </head>
 <body>
 
@@ -42,7 +43,7 @@ $row = mysqli_fetch_assoc($result);
     <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
         <!-- Title -->
-        <span class="mdl-layout-title">Ice Creamania!</span>
+        <a class="mdl-layout-title" href = "index.php">Ice Creamania!</a>
         <!-- Add spacer, to align navigation to the right (add spacer if no search bar)
         <div class="mdl-layout-spacer"></div> -->
         <div class="mdh-expandable-search mdl-cell--hide-phone">
@@ -56,9 +57,9 @@ $row = mysqli_fetch_assoc($result);
             <div id="tt1" class="icon material-icons"><button class="mdl-button mdl-js-button gotu top-bar-btn points"></button>
             </div>
                 <div class="mdl-tooltip mdl-tooltip--large" data-mdl-for="tt1">
-                Earn 100 points to get a free Ice-cream!
+                Earn 100 points to get a free Sundae!
                 </div>
-            <button class="mdl-button mdl-js-button gotu top-bar-btn">Sign Out</button>
+            <button class="mdl-button mdl-js-button gotu top-bar-btn"><a href="signout.php">Sign Out</a></button>
         </nav>
         </div>
     </header>
@@ -148,6 +149,7 @@ $row = mysqli_fetch_assoc($result);
                                               </form>
                                         </div>
                                         <div class="card main-card1" style="display: none;">
+                                            <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active spinner" style = "display:block"></div>
                                                 <!-- Table dyanamically created in JS -->
                                         </div>
                                     </div>

@@ -9,7 +9,7 @@ $userid = $_REQUEST['userid'];
 //         orders as o LEFT JOIN (SELECT oc.oc_oid, e.eid, e.ename FROM order_customization as oc INNER JOIN
 //          extras as e ON e.eid = oc.oc_eid) as a ON o.oid = a.oc_oid WHERE o_itemid = i.itemid and t.t_uid = $userid";
 
-$sql = "SELECT tid, t_uid, time, price FROM transaction WHERE t_uid = 12";
+$sql = "SELECT tid, t_uid, time, price FROM transaction WHERE t_uid = $userid";
 $result = $db->runQuery($sql);
 $transactions = array();
 while ($row = $result->fetch_assoc())

@@ -1,26 +1,70 @@
 $(document).ready(function(){
+    
     //Check if admin is logged in. If yes, then show the "ADMINPANEL" button on nav bar
     if(usertype == "admin")
     {
         $("#adminpanel").on("click", function() {
             window.location.href = "adminpanel.php?userid="+userid+"&username="+username;
         });
+        $("#cart").hide();
     }
     else
     {
         $("#adminpanel").hide();
         $(".mdh-expandable-search").css("margin-left","50px");
+        $(".top-bar").slideDown("500");
+        $("#top-bar-close").on("click",function(){
+            $(".top-bar").slideUp("500")
+        })
+        .on("mouseover",function(){
+            $(this).css("cursor", "pointer")
+            .css("background","rgba(206, 206, 206, 0.22)")
+            .css("border-radius", "5px");
+
+        })
+        .on("mouseout",function(){
+            $(this).css("background","none");
+        });
     }
     //========================================================================//
 
+    if (username != "Guest")
+    {
+        if(usertype == "user")
+        {
+        
+            $("#profile").on("click", function() {
+                $(".signout").toggle();
+            });
+
+        }
+        else if(usertype == "admin")
+        {
+            $("#profile").on("click", function() {
+                $(".signout").toggle()
+                $(".myprofile").hide();
+            });
+        }
+
+    }
+   
+
     //===Check if URL has any searchQueries===//
     let searchParams = new URLSearchParams(window.location.search)
-    if(searchParams.has('searchQuery'))
+    if(searchParams.has('searchQuery') && searchParams.has('category'))
     {
-        showProducts("s",null,null,searchParams.get('searchQuery'),null); //call showProducts and pass the search query
+        alert("both");
+        showProducts("s",null,null,searchParams.get('searchQuery'),searchParams.get('category').split(',')); //call showProducts and pass the search query
         $("#search-bar").val(searchParams.get('searchQuery')); //fill the search bar w/ search query
         $(".clear").css("visibility","visible"); // clear is the X button
 
+    }
+    else if(searchParams.has('searchQuery'))
+    {
+        alert("one");
+        showProducts("s",null,null,searchParams.get('searchQuery'),null); //call showProducts and pass the search query
+        $("#search-bar").val(searchParams.get('searchQuery')); //fill the search bar w/ search query
+        $(".clear").css("visibility","visible"); // clear is the X button
     }
     else
     {
@@ -232,7 +276,8 @@ $(document).ready(function(){
 //The function takes searchQueries and passes it to showProducts to display only specific products
 function search(searchQuery)
 {
-    showProducts("s",null,null,searchQuery,categories);
+    window.location = "menu.php?searchQuery="+searchQuery+"&category="+categories;
+    //showProducts("s",null,null,searchQuery,categories);
 }
 
 //Function is called when page number is clicked. elem is the page number <li>

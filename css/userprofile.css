@@ -75,3 +75,16 @@
     border-radius: 5px;
 }
 
+a
+{
+    color: inherit;
+}
+
+.spinner
+{
+    display: inline-block; 
+    margin: 20px auto;
+    width: 100px;
+    height: 100px;
+}
+

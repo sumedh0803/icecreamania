@@ -41,7 +41,8 @@ else
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/menu.css">
     <script src = "https://code.jquery.com/jquery-3.4.1.js"></script>
-    <title>Ice-Creamania | Menu</title>
+    <link rel="icon" href="./images/ice-cream-shop.png"/>
+    <title>Ice Creamania! | Menu</title>
     <script src="./js/menu.js"></script>
 </head>
 <body>
@@ -135,10 +136,12 @@ else
       </form>        
 </dialog>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <div class = "top-bar gotu" style="padding-bottom: 5px;">🎉Earn 1 point for $1 spent! Redeem 100 points to get 1 free Sundae!🎉<span class="material-icons" style="float: right;right: 10px;position: relative;top: -2px;" id = "top-bar-close">close</span>
+    </div>
       <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
           <!-- Title -->
-          <a href = "index.html" style = "color:white;"><span class="mdl-layout-title">Ice Creamania!</span></a>
+          <a href = "index.php" style = "color:white;"><span class="mdl-layout-title">Ice Creamania!</span></a>
           <!-- Add spacer, to align navigation to the right (add spacer if no search bar)
           <div class="mdl-layout-spacer"></div> -->
           <div class="mdh-expandable-search mdl-cell--hide-phone" style="margin-left:190px;">
@@ -157,8 +160,15 @@ else
           <!-- Navigation. We hide it in small screens. -->
           <nav class="mdl-navigation mdl-layout--large-screen-only">
               <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "adminpanel">Adminpanel</button>
-              <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "profile" >Hello, <?php echo $username; ?></button>
-              <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "cart"><img src="./images/cartImage.png" id="cart-image"/>Cart</button>
+              <div class="userprofile">
+                  <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "profile" >Hello, <?php echo $username; ?></button>
+                  <div class="signout gotu" style="display: none;">
+                    <div class="myprofile"><a href="userprofile.php">My Profile</a></div>
+                    <div class="sinout"><a href="signout.php">Sign Out</a></div>
+                  </div> 
+              </div>
+               <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "cart"><img src="./images/cartImage.png" id="cart-image"/>Cart</button>
+
           </nav>
         </div>
       </header>

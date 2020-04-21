@@ -1,3 +1,16 @@
+<?php 
+session_start();
+if(isset($_SESSION['username']))
+{
+  $username = $_SESSION['username'];
+  $usertype = $_SESSION['usertype'];
+}
+else
+{
+  $username = "Guest";
+  $usertype = "Guest";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,8 +21,13 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/index.css">
+    <script>
+      username = "<?php echo $username; ?>"
+      usertype = "<?php echo $usertype; ?>"
+    </script>
     <script src="./js/index.js"></script>
-    <title>Document</title>
+    <link rel="icon" href="./images/ice-cream-shop.png"/>
+    <title>Ice Creamania!</title>
 </head>
 <body>
     
@@ -53,7 +71,7 @@
           
           <div class="login-form">
             <div style="font-size: large;font-weight: bold;margin-bottom: 5px;line-height: 30px;" class = "gotu">Your Ice Cream won't melt!</div>
-            <div style="font-size: large;"><a href = "menu.html">Check out our menu NOW!</a></div>
+            <div style="font-size: large;"><a href = "menu.php">Check out our menu NOW!</a></div>
             
           
         </div>
@@ -82,6 +100,8 @@
     </dialog>
 
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <div class = "top-bar gotu" style="padding-bottom: 5px;"><b>COVID-19 ADVISORY:</b> Don't head out! Stay indoors. Order now and enjoy your favourite Ice Creams at home!🎉<span class="material-icons" style="float: right;right: 10px;position: relative;top: -2px;" id = "top-bar-close">close</span>
+      </div>
         <header class="mdl-layout__header">
           <div class="mdl-layout__header-row">
             <!-- Title -->
@@ -91,8 +111,15 @@
             <!-- Navigation. We hide it in small screens. -->
             <nav class="mdl-navigation mdl-layout--large-screen-only">
                 <a class="mdl-button mdl-js-button gotu top-bar-btn" id = "menu" href = "menu.php">Menu</a>
-                <a class="mdl-button mdl-js-button gotu top-bar-btn" id = "login" >Login</a>
-                <a class="mdl-button mdl-js-button gotu top-bar-btn" href = "signup.html">Sign Up</a>
+                <a class="mdl-button mdl-js-button gotu top-bar-btn" id = "login">Login</a>
+                <div class="userprofile">
+                  <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "profile" >Hello, <?php echo $username; ?></button>
+                  <div class="signout gotu" style="display: none;">
+                    <div class="myprofile"><a href="userprofile.php">My Profile</a></div>
+                    <div class="sinout"><a href="signout.php">Sign Out</a></div>
+                  </div> 
+              </div>
+                <a class="mdl-button mdl-js-button gotu top-bar-btn" href = "signup.html" id = "signup">Sign Up</a>
             </nav>
           </div>
         </header>
