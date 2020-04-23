@@ -35,7 +35,18 @@ else
         $getCartDetails = $dbcontroller -> runQuery("Select inventory.itemid as itemId,invqty,qty,itemname,rate,imagepath from cart,inventory where inventory.itemid = cart.itemid and uid = '".$row['uid']."'");
         $cartList = array();
         while($row =  mysqli_fetch_assoc($getCartDetails)){
-            $cartItem = array($row["itemId"] => array('itemname' => $row["itemname"], 'rate' => $row["rate"], 'imagepath' => $row["imagepath"], 'quantity' => $row["qty"], 'invqty' => $row["invqty"]));
+            $cartItemExtras = array();
+            $iid = $row['itemId'];
+            $getExtras = $dbcontroller -> runQuery("Select cc_eid,cc_itemid,ename,eid,rate from cart_customization,extras where cc_itemid = '$iid' and cc_eid = eid");
+            while($extras = mysqli_fetch_assoc($getExtras)){
+                $extraDetails = array();
+                $extraDetails['eid'] = $extras['eid'];
+                $extraDetails['ename'] = $extras['ename'];
+                $extraDetails['rate'] = $extras['rate'];
+                $extraDetails['qty'] = 1;
+                $cartItemExtras[] = $extraDetails;
+            }
+            $cartItem = array($row["itemId"] => array('itemname' => $row["itemname"], 'rate' => $row["rate"], 'imagepath' => $row["imagepath"], 'quantity' => $row["qty"], 'invqty' => $row["invqty"],'cartItemExtras' => $cartItemExtras));
             $cartList += $cartItem;
         }
         if(!empty($cartList) && count($cartList) > 0){

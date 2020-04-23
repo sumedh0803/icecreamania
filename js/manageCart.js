@@ -103,6 +103,34 @@ function loadCart(data){
                                         <button class="btn btn-danger" onclick="removeItem('`+products[i]["productId"]+`');" ><i class="fa fa-trash"></i></button>
                                     </td>
                                 </tr>`;
+                                if(products[i]['cartItemExtras']!=null && products[i]['cartItemExtras']!=undefined && products[i]['cartItemExtras'].length > 0){
+                                    
+                                    var extras = products[i]['cartItemExtras'];
+                                    for(var j = 0 ; j < extras.length; j++){
+                                        totalPrice += parseFloat(extras[j]['rate']) * parseInt(extras[j]['qty']);
+                                        s += `<tr>
+                                            <td scope="row" class="border-0">
+                                                <div class="p-2">
+                                                <div class="ml-3 d-inline-block align-middle" style="margin-left:70px;">
+                                                    <h5 class="mb-0">
+                                                        <a href="#" class="text-dark d-inline-block align-middle">`+extras[j]['ename']+`</a>
+                                                    </h5>
+                                                    <span class="text-muted font-weight-normal font-italic d-block"></span>
+                                                </div>
+                                            </div>
+                                            </td>
+                                            <td class="border-0 align-middle"><strong>$`+extras[j]['rate']+`</strong></td>
+                                            <td class="border-0 align-middle"><strong>
+                                            <div class="input-group">
+                                                <input type="number" step="1" readonly="readonly" value="`+extras[j]['qty']+`" name="quantity" class="quantity-field">
+                                            </div></strong></td>
+                                            <td class="border-0 align-middle"><strong>$`+(parseFloat(extras[j]['rate']) * parseInt(extras[j]['qty'])).toFixed(2)+`</strong></td>
+                                            <td class="border-0 align-middle">
+                                                
+                                            </td>
+                                        </tr>`;
+                                    }
+                                }
                             }
                             s += `</tbody>
                             <tfoot>
@@ -128,7 +156,7 @@ function loadCart(data){
                                 s+=`<input type="text" placeholder="Apply coupon" onkeydown="hideMsg();" id="couponCode" aria-describedby="button-addon3" class="form-control border-0"  value="`+couponCode+`">`;
                             }
                             s+=`<div class="input-group-append border-0">`;
-                            if(disableCoupon){
+                            if(couponMessage != ""){
                                 s+=`<button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill" id="coupon" onclick="removeCoupon();"><i class="fa fa-trash mr-2"></i>Remove coupon</button>`;
                             }
                             else{

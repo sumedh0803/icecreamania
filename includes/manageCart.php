@@ -80,7 +80,15 @@ if(isset($_REQUEST['action'])){
                 $uaid = $_REQUEST['uaid'];
                 $dbcontroller -> connectDb();
 
-                $orderQuery = "INSERT into transaction(price,t_uid,t_uaid) VALUES($total,$uid,$uaid)";
+                if(isset($_SESSION['couponApplied']) && $_SESSION['couponMessage'] && $_SESSION['couponId']){
+                    $total = floatval($total - floatval($total * $_SESSION['couponMessage'] / 100.0));
+                    $couponId = $_SESSION['couponId'];
+                    $orderQuery = "INSERT into transaction(price,t_uid,t_uaid,t_couponId) VALUES($total,$uid,$uaid,$couponId)";
+                    $dbcontroller -> runQuery("UPDATE coupons set lmt = lmt - 1 where couponid = '".$couponId."'");
+                }
+                else{
+                    $orderQuery = "INSERT into transaction(price,t_uid,t_uaid) VALUES($total,$uid,$uaid)";
+                }
                 $dbcontroller -> runQuery($orderQuery);
 
                 $orderId = $dbcontroller -> lastId();
@@ -91,9 +99,19 @@ if(isset($_REQUEST['action'])){
                     $itemid = "'".$key."'";
                     $orderItemsQuery = "INSERT into orders(quantity,price,tid,o_itemid) VALUES($itemQuantity,$itemRate,$orderId,$itemid)";
                     $dbcontroller -> runQuery($orderItemsQuery);
+                    if(isset($_SESSION["cartItemsList"][$key]["cartItemExtras"])){
+                        $oid = $dbcontroller -> lastId();
+                        foreach($_SESSION["cartItemsList"][$key]["cartItemExtras"] as $extras){
+                            $eid = "'".$extras['eid']."'";
+                            $dbcontroller -> runQuery("INSERT INTO order_customization(oc_oid,oc_eid,oc_itemid) VALUES($oid,$eid,$itemid)");
+                        }
+                    }
                 }
                 $dbcontroller -> close();
                 unset($_SESSION["cartItemsList"]);
+                unset($_SESSION['couponApplied']);
+                unset($_SESSION['couponMessage']);
+                unset($_SESSION['couponId']);
                 echo $orderId;
             }
         break;
@@ -102,7 +120,7 @@ if(isset($_REQUEST['action'])){
                 $_SESSION['couponApplied'] = TRUE;
                 $_SESSION['couponCode'] = $_REQUEST['coupon'];
                 $dbcontroller -> connectDb();
-                $orderQuery = "Select duedate,dateadded,amtoff from coupons where cname = '". $_REQUEST['coupon'] ."'";
+                $orderQuery = "Select duedate,dateadded,amtoff,lmt,couponid from coupons where cname = '". $_REQUEST['coupon'] ."'";
                 $result = $dbcontroller -> runQuery($orderQuery);
                 $num = mysqli_num_rows($result);
                 if($num > 0){
@@ -112,16 +130,21 @@ if(isset($_REQUEST['action'])){
                         $couponDetails['duedate'] = $row['duedate'];
                         $couponDetails['dateadded'] = $row['dateadded'];
                         $couponDetails['amtoff'] = $row['amtoff'];
+                        $couponDetails['lmt'] = $row['lmt'];
+                        $couponDetails['couponId'] = $row['couponid'];
                     }
-                    if($couponDetails['dateadded'] <= $today && $today <= $couponDetails['duedate']){
+                    if($couponDetails['dateadded'] <= $today and $today <= $couponDetails['duedate'] and $couponDetails['lmt'] > 0){
                         $_SESSION['couponMessage'] = $couponDetails['amtoff'];
+                        $_SESSION['couponId'] = $couponDetails['couponId'];
                     }
                     else{
                         $_SESSION['couponMessage'] = "expired";
+                        unset($_SESSION['couponId'] );
                     }
                 }
                 else{
                     $_SESSION['couponMessage'] = "invalid";
+                    unset($_SESSION['couponId'] );
                 }
                 $dbcontroller -> close();
                 displayCart();
@@ -169,6 +192,12 @@ function displayCart() {
             $product["rate"] = $_SESSION["cartItemsList"][$key]["rate"];
             $product["quantity"] = $_SESSION["cartItemsList"][$key]["quantity"];
             $product["itemname"] = $_SESSION["cartItemsList"][$key]["itemname"];
+            if(isset($_SESSION["cartItemsList"][$key]["cartItemExtras"])){
+                $product["cartItemExtras"] = $_SESSION["cartItemsList"][$key]["cartItemExtras"];
+                foreach($_SESSION["cartItemsList"][$key]["cartItemExtras"] as $extras){
+                    $totalPrice += $extras['rate'];
+                }
+            }
             $product["imagepath"] = $_SESSION["cartItemsList"][$key]["imagepath"];
             $product["invqty"] = $_SESSION["cartItemsList"][$key]["invqty"];
             $product["productId"] = $key;

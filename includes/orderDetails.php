@@ -45,7 +45,6 @@
         <link rel="stylesheet" href="../css/menu.css">
         <script src="../js/menu.js"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-        <script src ="../js/manageCart.js"></script>
     </head>
     <body>
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -78,11 +77,14 @@
             </header>
         <main class="mdl-layout__content">
             <div class="page-content">
+                <div id="results">
             <?php
             if(isset($_GET["orderId"])){
                 $dbcontroller = new DBController();
                 $dbcontroller -> connectDb();
                 $orderId = $_GET["orderId"];
+                $transactionDetails = $dbcontroller -> runQuery("SELECT price from transaction where tid = $orderId");
+                $transactionResult = mysqli_fetch_assoc($transactionDetails);
                 $orderDetails = $dbcontroller -> runQuery("SELECT quantity,itemname,price,imagepath from orders,inventory where tid = $orderId and o_itemid = itemid");
                 $dbcontroller -> close();
 
@@ -144,7 +146,21 @@
                                         <tr>
                                             <td><a href="orders.php" class="btn btn-warning"><i class="fa fa-angle-left"></i> Back to orders</a></td>
                                             <td colspan="2" class="hidden-xs"></td>
-                                            <td class="hidden-xs text-center"><strong>Total $ <?php echo $totalPrice;?></strong></td>
+                                            <td class="hidden-xs text-center">
+                                                <strong>
+                                                    <?php 
+                                                        $finalCost = $transactionResult['price'];
+                                                        $diff = floatval($totalPrice - $finalCost);
+                                                        if($diff > 0){
+                                                            ?>
+                                                            Total $ <?php echo $totalPrice ?></br>
+                                                            Coupon Discount -$<?php echo $diff ?></br>
+                                                            <?php
+                                                        }
+                                                    ?>
+                                                    Final Price $ <?php echo $finalCost;?>
+                                                </strong>
+                                            </td>
                                         </tr>
                                     </tfoot>
                                 </table>

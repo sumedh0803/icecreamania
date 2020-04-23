@@ -13,7 +13,21 @@
     $getProductDetails = $dbcontroller -> runQuery("Select * from inventory where itemid = '". $_REQUEST['itemid'] ."'");
     $productDetailsResult = mysqli_fetch_assoc($getProductDetails);
     $cartItem = array();
-    $cartItem[$productDetailsResult["itemid"]] = array('itemname' => $productDetailsResult["itemname"], 'rate' => $productDetailsResult["rate"], 'imagepath' => $productDetailsResult["imagepath"], 'quantity' => $_REQUEST['qty'], 'invqty' => $productDetailsResult["invqty"]);
+    $cartItemExtras = array();
+    if(isset($_REQUEST['extras']) and $_REQUEST['extras']!=""){
+        $extrasArray = explode(",", $_REQUEST['extras']);
+        $extrasArray = join("','", $extrasArray);
+        $getExtrasDetails = $dbcontroller -> runQuery("Select * from extras where eid in ('$extrasArray')");
+        while($row = mysqli_fetch_assoc($getExtrasDetails)){
+            $extraDetails = array();
+            $extraDetails['eid'] = $row['eid'];
+            $extraDetails['ename'] = $row['ename'];
+            $extraDetails['rate'] = $row['rate'];
+            $extraDetails['qty'] = 1;
+            $cartItemExtras[] = $extraDetails;
+        }
+    }
+    $cartItem[$productDetailsResult["itemid"]] = array('itemname' => $productDetailsResult["itemname"], 'rate' => $productDetailsResult["rate"], 'imagepath' => $productDetailsResult["imagepath"], 'quantity' => $_REQUEST['qty'], 'invqty' => $productDetailsResult["invqty"],'cartItemExtras' => $cartItemExtras);
     if(isset($_SESSION["cartItemsList"])){
         if(in_array($productDetailsResult["itemid"],array_keys($_SESSION["cartItemsList"]))){
             foreach($_SESSION["cartItemsList"] as $key => $value){
