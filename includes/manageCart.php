@@ -8,7 +8,20 @@ if(isset($_REQUEST['action'])){
             if(isset($_GET["productId"]) and isset($_SESSION["cartItemsList"])){
                 foreach($_SESSION["cartItemsList"] as $key => $value){
                     if($key == $_GET["productId"]){
-                        unset($_SESSION["cartItemsList"][$key]);
+                        if(isset($_GET["extrasId"]) and isset($_SESSION["cartItemsList"][$key]["cartItemExtras"])){
+                            $extras = $_SESSION["cartItemsList"][$key]["cartItemExtras"];
+                            for($i = 0; $i < count($extras); $i++){
+                                if($extras[$i]["eid"] == $_GET["extrasId"]){
+                                    unset($_SESSION["cartItemsList"][$key]["cartItemExtras"][$i]);
+                                }
+                                if(empty($_SESSION["cartItemsList"][$key]["cartItemExtras"])){
+                                    unset($_SESSION["cartItemsList"][$key]["cartItemExtras"]);
+                                }
+                            }
+                        }
+                        else{
+                            unset($_SESSION["cartItemsList"][$key]);
+                        }
                         if(empty($_SESSION["cartItemsList"])){
                             unset($_SESSION["cartItemsList"]);
                         }
@@ -207,6 +220,7 @@ function displayCart() {
             $data[] = $product;
         }
         $_SESSION["totalQuantity"] = $totalQuantity;
+        $totalPrice = floatval($totalPrice + $totalPrice * 0.1 + 2.5);
         $_SESSION["totalPrice"] = $totalPrice;
     }
     else{

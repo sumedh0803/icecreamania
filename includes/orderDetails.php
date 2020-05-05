@@ -85,9 +85,7 @@
                 $orderId = $_GET["orderId"];
                 $transactionDetails = $dbcontroller -> runQuery("SELECT price from transaction where tid = $orderId");
                 $transactionResult = mysqli_fetch_assoc($transactionDetails);
-                $orderDetails = $dbcontroller -> runQuery("SELECT quantity,itemname,price,imagepath from orders,inventory where tid = $orderId and o_itemid = itemid");
-                $dbcontroller -> close();
-
+                $orderDetails = $dbcontroller -> runQuery("SELECT quantity,itemname,price,imagepath,oid from orders,inventory where tid = $orderId and o_itemid = itemid");
                 $totalPrice = 0;
                 $totalQuantity = 0;
         ?>
@@ -138,6 +136,35 @@
                                                     <td class="border-0 align-middle"><strong>$<?php echo $row["price"] * $row["quantity"]; ?></strong></td>
                                                 </tr>
                                                 <?php
+                                                    $oid = "'".$row['oid']."'";
+                                                    $orderExtras = $dbcontroller -> runQuery("SELECT oc_eid from order_customization where oc_oid = $oid");
+                                                    while($extras = mysqli_fetch_assoc($orderExtras)){
+                                                        $eid = "'".$extras["oc_eid"]."'";
+                                                        $extraDetails = $dbcontroller -> runQuery("SELECT ename,rate from extras where eid = $eid");
+                                                        while($det = mysqli_fetch_assoc($extraDetails)){
+                                                            ?>
+                                                            <tr>
+                                                                <th scope="row" class="border-0">
+                                                                    <div class="p-2">
+                                                                        <div class="ml-3 d-inline-block align-middle">
+                                                                            <h5 class="mb-0">
+                                                                                <a href="#" class="text-dark d-inline-block align-middle">
+                                                                                    <?=$det["ename"]; ?>
+                                                                                </a>
+                                                                            </h5>
+                                                                            <span class="text-muted font-weight-normal font-italic d-block"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </th>
+                                                                <td class="border-0 align-middle"><strong>$<?=$det["rate"]; ?></strong></td>
+                                                                <td class="border-0 align-middle"><strong>1</strong></td>
+                                                                <td class="border-0 align-middle"><strong>$<?= $det["rate"]?></strong></td>
+                                                            </tr>
+                                                        <?php
+                                                        }
+                                                    }
+                                                ?>
+                                                <?php
                                             }
                                         }
                                         ?>
@@ -174,6 +201,7 @@
             else{
                 echo "No order details to display";
             }
+            $dbcontroller -> close();
         ?>
             </div>
         </main>

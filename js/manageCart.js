@@ -126,7 +126,7 @@ function loadCart(data){
                                             </div></strong></td>
                                             <td class="border-0 align-middle"><strong>$`+(parseFloat(extras[j]['rate']) * parseInt(extras[j]['qty'])).toFixed(2)+`</strong></td>
                                             <td class="border-0 align-middle">
-                                                
+                                                <!--<button class="btn btn-danger" onclick="removeItem('`+products[i]["productId"]+`,`+extras[j]["eid"]+`');" ><i class="fa fa-trash"></i></button>-->
                                             </td>
                                         </tr>`;
                                     }
@@ -187,7 +187,9 @@ function loadCart(data){
                         <p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
                         <ul class="list-unstyled mb-4">
                         <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong>$`+totalPrice.toFixed(2)+`</strong></li>
-                        <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong>$0.00</strong></li>`
+                        <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong>$`+(totalPrice*0.1).toFixed(2)+`</strong></li>
+                        <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Service Charge</strong><strong>$2.5</strong></li>`
+                        totalPrice = totalPrice + totalPrice * 0.1 + 2.5;
                         if(disableCoupon){
                             s+=`<li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Coupon Discount</strong><strong>-$`+(totalPrice * parseInt(couponMessage) / 100).toFixed(2)+`</strong></li>`;
                         }                        
@@ -254,16 +256,32 @@ function loadCart(data){
 }
 
 function removeItem(itemId){
-    $.ajax({
-        url: "./manageCart.php",
-        data: { 
-            action: "remove",
-            productId: itemId
-        },
-        success: function(data){
-            loadCart(data);
-        }
-    });
+    if(itemId.includes(",")){
+        var arr = itemId.split(",");
+        $.ajax({
+            url: "./manageCart.php",
+            data: { 
+                action: "remove",
+                productId: arr[0],
+                extrasId: arr[1]
+            },
+            success: function(data){
+                loadCart(data);
+            }
+        });
+    }
+    else{
+        $.ajax({
+            url: "./manageCart.php",
+            data: { 
+                action: "remove",
+                productId: itemId
+            },
+            success: function(data){
+                loadCart(data);
+            }
+        });
+    }
 }
 
 function addItem(itemId){
