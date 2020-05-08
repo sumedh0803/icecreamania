@@ -61,9 +61,7 @@ $(document).ready(function (){
         imageSources = ["Ice Cream Icons-01.png", "Ice Cream Icons-02.png",
         "Ice Cream Icons-03.png","Ice Cream Icons-04.png","Ice Cream Icons-05.png",
         "Ice Cream Icons-06.png","Ice Cream Icons-07.png","Ice Cream Icons-08.png",
-        "Ice Cream Icons-09.png","Ice Cream Icons-10.png","Ice Cream Icons-11.png",
-        "Ice Cream Icons-12.png","Ice Cream Icons-13.png","Ice Cream Icons-14.png",
-        "Ice Cream Icons-15.png","Ice Cream Icons-16.png"]
+        "Ice Cream Icons-09.png","Ice Cream Icons-10.png"]
         index = 0
         timeout = setInterval(function(){ 
             if(index == imageSources.length)

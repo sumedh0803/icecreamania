@@ -35,7 +35,7 @@ else
       <span class="material-icons close-icon" style="position: relative;top: 0;left: 97%;" id="dialog-close-1">close</span>
       <div class = "">
         <div class="img-switcher ">
-          <img src="./images/Ice Cream Icons-01.png" alt="ice creams" width="100%;" id="images">                
+          <img src="./images/Ice Cream Icons-01.png" alt="ice creams" width="85%;" id="images" style = "margin: auto;margin-top: 20px;">                
         </div>
         <div class="login-form-container">
           
@@ -143,11 +143,14 @@ else
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored addr">
                   Check Address
                 </button>
+              </form>
             </div>
 
-            </div>
-        </main>
+          </div>
+          
+        </main>        
       </div>
+      
       <link href="https://fonts.googleapis.com/css2?family=Spicy+Rice&display=swap" rel="stylesheet">
       <link href="https://fonts.googleapis.com/css2?family=Gotu&display=swap" rel="stylesheet">
     

@@ -169,11 +169,7 @@ a
     }
   }
   
-  /* Bug fix for badges being in the wrong location */
-  .mdl-badge[data-badge]:after {
-    right: -7px;
-    top: -8px;
-  }
+
 
 .img-switcher-cart
 {
@@ -183,4 +179,5 @@ a
     flex-direction: column;
     padding: 5px;
 }
-  
+.required:before { content:" *"; 
+    color: red}

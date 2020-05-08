@@ -167,7 +167,9 @@ else
                     <div class="sinout"><a href="signout.php">Sign Out</a></div>
                   </div> 
               </div>
-               <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "cart"><img src="./images/cartImage.png" id="cart-image"/>Cart</button>
+              <span id="cart-wrapper">
+                <span class="mdl-badge gotu top-bar-btn" style="font-size:14px;margin-left:15px;cursor:pointer" data-badge="0" id = "cart">CART</span>
+              </span>
 
           </nav>
         </div>
@@ -209,9 +211,12 @@ else
               </div>
 
             </div>
+           
         </main>
+        
       </div>
       
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    
 </body>
 </html>

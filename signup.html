@@ -26,7 +26,7 @@
         
         <div class="dialog-content">
           <div style="font-size: large;font-weight: bold;margin-bottom: 5px;line-height: 30px;" class = "gotu">You're Registered!</div>
-          <div style="font-size: large;"><a href = "index.html">Log in now to get started!</a></div>
+          <div style="font-size: large;"><a href = "index.php">Log in now to get started!</a></div>
           
         
       </div>
@@ -79,6 +79,7 @@
           <!-- Add spacer, to align navigation to the right -->
           <div class="mdl-layout-spacer"></div>
           <!-- Navigation. We hide it in small screens. -->
+          
           <nav class="mdl-navigation mdl-layout--large-screen-only">
               <a class="mdl-button mdl-js-button gotu top-bar-btn" id = "menu" href = "menu.php">Menu</a>
           </nav>
@@ -87,23 +88,23 @@
         
         <main class="mdl-layout__content">
           <div class="page-content" style="height: 100%; position: relative;"><!-- Your content goes here -->
-            <div class = "bg" style="height: 100%;">
+            <div class = "bg" style="overflow:auto">
               <div class = "signup-form">
                 <div class = "signup-title gotu">Sign Up</div>
                 <form action="#" class = " gotu form">
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 49%;margin-right: 5px;;">
                     <input class="mdl-textfield__input" type="text" id="fname">
-                    <label class="mdl-textfield__label" for="fname">First Name</label>
+                    <label class="mdl-textfield__label" for="fname">First Name <span class = "required"></span></label>
                     <span id="eFname" class="mdl-textfield__error"></span>
                   </div>
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 49%;">
                     <input class="mdl-textfield__input" type="text" id="lname">
-                    <label class="mdl-textfield__label" for="lname">Last Name</label>
+                    <label class="mdl-textfield__label" for="lname">Last Name <span class = "required"></span></label>
                     <span id="eLname" class="mdl-textfield__error"></span>
                   </div>
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100%;">
                     <input class="mdl-textfield__input" type="text" id="addr1">
-                    <label class="mdl-textfield__label" for="addr1">Address Line 1</label>
+                    <label class="mdl-textfield__label" for="addr1">Address Line 1 <span class = "required"></span></label>
                     <span id="eAddr1" class="mdl-textfield__error"></span>
                   </div>
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"  style="width: 49%;">
@@ -112,17 +113,17 @@
                   </div>
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 49%;margin-right: 5px;;">
                     <input class="mdl-textfield__input" type="number" id="phone">
-                    <label class="mdl-textfield__label" for="phone">Phone</label>
+                    <label class="mdl-textfield__label" for="phone">Phone <span class = "required"></span></label>
                     <span id = "ePhone" class="mdl-textfield__error"></span>
                   </div>
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 49%;margin-right: 5px;;">
                     <input class="mdl-textfield__input" type="text" id="city">
-                    <label class="mdl-textfield__label" for="city">City</label>
+                    <label class="mdl-textfield__label" for="city">City <span class = "required"></span></label>
                     <span id = "eCity" class="mdl-textfield__error"></span>
                   </div>
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 49%;">
                     <input class="mdl-textfield__input" type="number" id="pin">
-                    <label class="mdl-textfield__label" for="pin">Pin Code</label>
+                    <label class="mdl-textfield__label" for="pin">Pin Code <span class = "required"></span></label>
                     <span id = "ePin" class="mdl-textfield__error"></span>
                   </div>
                   <div style="width: 100%;padding:20px 0;">
@@ -138,12 +139,12 @@
                   </div>
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 49%;margin-right: 5px;;">
                     <input class="mdl-textfield__input" type="email" id="email">
-                    <label class="mdl-textfield__label" for="email">Email</label>
+                    <label class="mdl-textfield__label" for="email">Email <span class = "required"></span></label>
                     <span id = "eEmail" class="mdl-textfield__error"></span>
                   </div>
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 49%;">
                     <input class="mdl-textfield__input" type="password" id="pwd">
-                    <label class="mdl-textfield__label" for="pwd">Password</label>
+                    <label class="mdl-textfield__label" for="pwd">Password <span class = "required"></span></label>
                   </div>
                   <div id="pswd_info">
                     <h4>Password must meet the following requirements:</h4>
@@ -156,12 +157,12 @@
                   </div>
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 48%;margin-right: 5px;;">
                     <input class="mdl-textfield__input" type="email" id="email-conf">
-                    <label class="mdl-textfield__label" for="email-conf">Confirm Email</label>
+                    <label class="mdl-textfield__label" for="email-conf">Confirm Email <span class = "required"></span></label>
                     <span id = "eEmailC" class="mdl-textfield__error"></span>
                   </div>
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 49%;">
                     <input class="mdl-textfield__input" type="password" id="pwd-conf">
-                    <label class="mdl-textfield__label" for="pwd-conf">Confirm Password</label>
+                    <label class="mdl-textfield__label" for="pwd-conf">Confirm Password <span class = "required"></span></label>
                     <span id = "ePwdC" class="mdl-textfield__error"></span>
                   </div>
                   <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" id = "submit" style="width: 100%;" disabled>

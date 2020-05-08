@@ -8,7 +8,7 @@
     {
         if($usertype == "user")
         {
-            $sql1 = "SELECT * FROM inventory WHERE deleteitem = 0";
+            $sql1 = "SELECT * FROM inventory WHERE deleteitem = 0 OR invqty > 0";
             $result1 = $db->runQuery($sql1);
             $rowcount = mysqli_num_rows($result1);
             echo $rowcount;
@@ -33,7 +33,7 @@
         {
             if($usertype == "user")
             {
-                $sql = "SELECT * FROM inventory WHERE special = 1 AND deleteitem = 0";
+                $sql = "SELECT * FROM inventory WHERE special = 1 AND (deleteitem = 0 AND invqty > 0)";
             }
             else
             {
@@ -44,7 +44,7 @@
         {
             if($usertype == "user")
             {
-                $sql = "SELECT * FROM inventory WHERE deleteitem = 0 AND category in(";
+                $sql = "SELECT * FROM inventory WHERE category in(";
                 $categories = explode(",",$category);
                 for($i = 0;$i < sizeof($categories);$i++)
                 {
@@ -53,7 +53,7 @@
                     else
                         $sql .= "'".$categories[$i]."',";   
                 }
-                $sql .= ") LIMIT 12 offset $start";
+                $sql .= ")AND (deleteitem = 0 AND invqty > 0) LIMIT 12 offset $start";
             }
             else
             {       
@@ -66,7 +66,7 @@
                     else
                         $sql .= "'".$categories[$i]."',";   
                 }
-                $sql .= ") LIMIT 12 offset $start";
+                $sql .= ")LIMIT 12 offset $start";
 
                 }    
         }
@@ -74,7 +74,7 @@
         {
             if($usertype == "user")
             {
-                $sql = "SELECT * FROM inventory WHERE deleteitem = 0 AND lower(itemname) LIKE lower('%$searchQuery%') AND category in (";
+                $sql = "SELECT * FROM inventory WHERE lower(itemname) LIKE lower('%$searchQuery%') AND category in (";
                 $categories = explode(",",$category);
                 for($i = 0;$i < sizeof($categories);$i++)
                 {
@@ -83,7 +83,7 @@
                     else
                         $sql .= "'".$categories[$i]."',";   
                 }
-                $sql .= ")";
+                $sql .= ") AND (deleteitem = 0 AND invqty > 0) ";
             }
             else
             {
@@ -104,7 +104,7 @@
         {   
             if($usertype == "user")
             {
-                $sql = "SELECT * FROM inventory WHERE deleteitem = 0 AND category in(";
+                $sql = "SELECT * FROM inventory WHERE category in(";
                 $categories = explode(",",$category);
                 for($i = 0;$i < sizeof($categories);$i++)
                 {
@@ -113,7 +113,7 @@
                     else
                         $sql .= "'".$categories[$i]."',";   
                 }
-                $sql .= ")";
+                $sql .= ") AND (deleteitem = 0 AND invqty > 0) ";
             }
             else
             {
@@ -134,7 +134,7 @@
         {
             if($usertype == "user")
             {
-                $sql = "SELECT * FROM inventory WHERE deleteitem = 0 LIMIT 12 offset $start";
+                $sql = "SELECT * FROM inventory WHERE deleteitem = 0 AND invqty > 0 LIMIT 12 offset $start";
             }
             else
             {
@@ -146,7 +146,7 @@
         {
             if($usertype == "user")
             {
-                $sql = "SELECT * FROM inventory WHERE deleteitem = 0 AND lower(itemname) LIKE lower('%$searchQuery%')";
+                $sql = "SELECT * FROM inventory WHERE lower(itemname) LIKE lower('%$searchQuery%') AND (deleteitem = 0 AND invqty > 0)";
             }
             else
             {

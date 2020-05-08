@@ -104,8 +104,47 @@ $(document).ready(function() {
         }
     });
 
+    //====Functions related to search bar===//
+    //This ajax call populates the suggestion box with names containing the searchQuery
+    $("#search-bar").on("keyup",function(){
+        if($(this).val() == "")
+            $(".clear").css("visibility","hidden");
+        else
+            $(".clear").css("visibility","visible");
+        $(".sugg-box").show();
+        var searchQuery = $(this).val();
+        $.ajax({
+            url: "./includes/searchResults.php",
+            data: { searchQuery: searchQuery,
+                    usertype: usertype},
+            success: function(data){
+                items = data.split(",")
+                $(".sugg-box").empty();
+                for(i = 0; i < items.length; i++)
+                {
+                    var li = document.createElement("li");
+                    $(li).attr("id",i+1);
+                    $(li).attr("class","search-item");
+                    $(li).attr("onclick","search('"+items[i]+"')");
+                    $(li).text(items[i]);
+                    $(".sugg-box").append(li);
+                }
+            }
+        });
+    });
+    $(".clear").on("click",function(){
+        window.location = window.location.href;
+    });
 
-    function updateuserprofile(userid, active)
+    $('.search').click(function(event){
+        searchQuery = $('#search-bar').val();
+        search(searchQuery)
+        
+    });
+    //========================================================================//
+
+
+function updateuserprofile(userid, active)
 {
     if(active == 0 || ($("#addr21").val() != "" && $("#addr22").val() != "" && $("#zip2").val() != "" && $("#city2").val() != ""))
     {
@@ -157,7 +196,6 @@ function deleteaddress(userid)
     });
 }
 
-
 function loadtransactions(userid)
 {
     $.ajax({
@@ -195,7 +233,7 @@ function loadtransactions(userid)
                             var transid = fullname+userid+finaldate+finaltime;
 
                             t += `<tr>
-                                     <td class="mdl-data-table__cell--non-numeric" style="text-align:center;"><b>#`+transdata[i]['tid']+`</b></td>
+                                     <td class="mdl-data-table__cell--non-numeric" style="text-align:center;"><b>#`+transid+`</b></td>
                                      <td class="mdl-data-table__cell--non-numeric" style="text-align:center;">`+timestamp[0]+" | "+timestamp[1]+`</td>`;
 
                             orders = transdata[i]['orders'];
@@ -222,7 +260,7 @@ function loadtransactions(userid)
             }
             else
             {
-                $(".main-card1").html(`<h3>No Transaction history available!</h3>`);
+                $(".main-card1").html(`<h3 class = "gotu">No Transaction history available!</h3>`);
             }
         },
         error: function (error){
@@ -232,6 +270,13 @@ function loadtransactions(userid)
 }
 
 });
+
+//The function takes searchQueries and passes it to showProducts to display only specific products
+function search(searchQuery)
+{
+    window.location = "menu.php?searchQuery="+searchQuery;
+    //showProducts("s",null,null,searchQuery,categories);
+}
 
 
 

@@ -46,12 +46,19 @@ $row = mysqli_fetch_assoc($result);
         <a class="mdl-layout-title" href = "index.php">Ice Creamania!</a>
         <!-- Add spacer, to align navigation to the right (add spacer if no search bar)
         <div class="mdl-layout-spacer"></div> -->
-        <div class="mdh-expandable-search mdl-cell--hide-phone">
-            <i class="material-icons">search</i>
-            <form action="#">
-            <input type="text" placeholder="Search" size="1">
+        <div class="mdh-expandable-search mdl-cell--hide-phone" style="margin-left:190px;">
+            
+            <form action="#" style = "margin-bottom: 0px;">
+              <input type="text" placeholder="Search" size="1" id="search-bar">
             </form>
-        </div>
+            <i class="material-icons search">search</i>
+            <i class="material-icons clear">clear</i>
+          </div>
+          
+
+          <ul class = "sugg-box">
+           
+          </ul>
         <!-- Navigation. We hide it in small screens. -->
         <nav class="mdl-navigation mdl-layout--large-screen-only">
             <div id="tt1" class="icon material-icons"><button class="mdl-button mdl-js-button gotu top-bar-btn points"></button>

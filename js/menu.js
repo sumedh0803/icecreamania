@@ -1,5 +1,6 @@
 $(document).ready(function(){
     
+    getCartCount();
     //Check if admin is logged in. If yes, then show the "ADMINPANEL" button on nav bar
     if(usertype == "admin")
     {
@@ -45,7 +46,11 @@ $(document).ready(function(){
                 $(".myprofile").hide();
             });
         }
-
+    }
+    else
+    {
+        $("#cart-wrapper").css("cursor","not-allowed");
+        $("#cart").css("pointer-events", "none");
     }
    
 
@@ -53,7 +58,6 @@ $(document).ready(function(){
     let searchParams = new URLSearchParams(window.location.search)
     if(searchParams.has('searchQuery') && searchParams.has('category'))
     {
-        alert("both");
         showProducts("s",null,null,searchParams.get('searchQuery'),searchParams.get('category').split(',')); //call showProducts and pass the search query
         $("#search-bar").val(searchParams.get('searchQuery')); //fill the search bar w/ search query
         $(".clear").css("visibility","visible"); // clear is the X button
@@ -61,7 +65,6 @@ $(document).ready(function(){
     }
     else if(searchParams.has('searchQuery'))
     {
-        alert("one");
         showProducts("s",null,null,searchParams.get('searchQuery'),null); //call showProducts and pass the search query
         $("#search-bar").val(searchParams.get('searchQuery')); //fill the search bar w/ search query
         $(".clear").css("visibility","visible"); // clear is the X button
@@ -81,6 +84,7 @@ $(document).ready(function(){
             }
         });
     }
+    
     //====Functions related to search bar===//
     //This ajax call populates the suggestion box with names containing the searchQuery
     $("#search-bar").on("keyup",function(){
@@ -220,7 +224,6 @@ $(document).ready(function(){
             categories.push($(this).text());
             $("#search-bar").val("");
         }
-        console.log(categories);
         showProducts("c",null,null,null,categories);
     });
     $(".category-list>a").on("mouseover",function(){
@@ -242,7 +245,7 @@ $(document).ready(function(){
 
     //======This function will go to cart page.======//
     $("#cart").click(function(){
-        window.location.href = "/icecreamania/includes/cart.php";
+        window.location.href = "./cart.php";
     });
     //========================================================================//
 
@@ -265,6 +268,7 @@ $(document).ready(function(){
                 //if item successfully added to cart, close the dialog box
                 $("#customize").hide();
                 $(".mdl-layout__container").removeClass("blur-filter");
+                getCartCount();
             },
             error: function (error){
                 console.log(error);
@@ -496,10 +500,10 @@ function showProducts(caller,start,end,searchQuery,category)
                 } //for loop ends here
                 //These functions are set on plus, minus, add to cart and edit item buttons on product cards.
                 $('.input-group').on('click', '.button-plus', function(e) {
-                    incrementValue(e,invqty);
+                    incrementValue(e);
                 });
                 $('.input-group').on('click', '.button-minus', function(e) {
-                    decrementValue(e,invqty);
+                    decrementValue(e);
                     });
                 $(".addtocart").on("click", function(){
                     qty = $(this).closest('div').siblings(".input-group").find(".quantity-field").val();
@@ -540,24 +544,25 @@ function makePagination(itemCount)
 }
 
 //Increments value in the quantity field.
-function incrementValue(e,invqty) 
+function incrementValue(e) 
 {
     e.preventDefault();
     var fieldName = $(e.target).data('field');
     var parent = $(e.target).closest('div');
     var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val());
+    var invqty = parseInt(parent.find('input[name=' + fieldName + ']').attr("max"));
     if(currentVal >= 1)
     {
         parent.find('.button-minus').val("-").css('background-color','#e53935');
         parent.find('.button-minus').val("-").css('cursor','pointer');
         parent.find('.button-minus').removeAttr("disabled");
     }
-    if(currentVal < invqty) 
+    if(currentVal < Math.min(10, invqty)) 
     {
         parent.find('input[name=' + fieldName + ']').val(currentVal + 1);
         parent.find(".button-plus").val("+").css('color','#000000');
         parent.find(".button-plus").val("+").css('cursor','pointer');
-        if(currentVal + 1 == invqty)
+        if(currentVal + 1 == Math.min(10, invqty))
         {
             parent.find(".button-plus").val("+").css('background-color','#aaa');
             parent.find(".button-plus").val("+").css('cursor','not-allowed');
@@ -566,13 +571,14 @@ function incrementValue(e,invqty)
 }
  
 //Decrements value in the quantity field.
-function decrementValue(e,invqty) {
+function decrementValue(e) {
     e.preventDefault();
     var fieldName = $(e.target).data('field');
     var parent = $(e.target).closest('div');
     var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
-    
-    if(currentVal <= invqty)
+    var invqty = parseInt(parent.find('input[name=' + fieldName + ']').attr("max"));
+
+    if(currentVal <= Math.min(10,invqty))
     {
         parent.find(".button-plus").val("+").css('background-color','#00c853');
         parent.find(".button-plus").val("+").css('cursor','pointer');
@@ -698,6 +704,18 @@ function addToCart(qty,id)
         },
         error: function (error){
             console.log(error);
+        }
+    });
+}
+
+function getCartCount()
+{
+    $.ajax({
+        url: "./includes/getCartCount.php",
+        data: { 
+        },
+        success: function(data){
+            $("#cart").attr("data-badge",data);
         }
     });
 }
@@ -859,7 +877,7 @@ function editProduct(id)
             }
         },
         error: function (data){
-            alert(data.message);
+            alert(data);
         }
     });
 }

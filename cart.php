@@ -40,11 +40,13 @@ else
     <link href="https://fonts.googleapis.com/css2?family=Gotu&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.pink-blue.min.css">
-    <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/menu.css">
-    <script src="../js/menu.js"></script>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/cart.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-    <script src ="../js/manageCart.js"></script>
+    <!-- <script src="./js/menu.js"></script> -->
+    <script src ="./js/manageCart.js"></script>
+    <link rel="icon" href="./images/ice-cream-shop.png"/>
+    <title>Ice Creamania! | My Cart</title>
 </head>
 <body>
 <dialog id="customize" class = "gotu">
@@ -52,19 +54,19 @@ else
     <div style = "float:left">
         <div class = "prod-title gotu">Please select an address</div>
         <div class = "prod-desc gotu"></div>
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" style="width: 50%;" id = "placeOrder">
+    </div>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" style="width: 50%;margin-left: 25%;" id = "placeOrder">
           Place order
         </button>
-    </div>
 </dialog>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
         <!-- Title -->
-        <a href = "../menu.php" style = "color:white;"><span class="mdl-layout-title">Ice Creamania!</span></a>
+        <a href = "index.php" style = "color:white;text-decoration:none;"><span class="mdl-layout-title">Ice Creamania!</span></a>
         <!-- Add spacer, to align navigation to the right (add spacer if no search bar)
         <div class="mdl-layout-spacer"></div> -->
-        <div class="mdh-expandable-search mdl-cell--hide-phone" style="margin-left:190px;">
+        <div class="mdh-expandable-search mdl-cell--hide-phone">
         
         <form action="#" style = "margin-bottom: 0px;">
             <input type="text" placeholder="Search" size="1" id="search-bar">
@@ -80,8 +82,15 @@ else
         <!-- Navigation. We hide it in small screens. -->
         <nav class="mdl-navigation mdl-layout--large-screen-only">
             <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "adminpanel">Adminpanel</button>
-            <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "profile" >Hello, <?php echo $username; ?></button>
-            <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "cart"><img src="../images/cartImage.png" id="cart-image"/>Cart</button>
+             <div class="userprofile">
+                  <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "profile" >Hello, <?php echo $username; ?></button>
+                  <div class="signout gotu" style="display: none;">
+                    <div class="myprofile"><a href="userprofile.php">My Profile</a></div>
+                    <div class="sinout"><a href="signout.php">Sign Out</a></div>
+                  </div> 
+              </div>
+            <button class="mdl-button mdl-js-button gotu top-bar-btn" id = "menu" onclick= "window.location.href = 'menu.php';">Menu</button>
+            <span class="mdl-badge gotu top-bar-btn" style="font-size:14px;margin-left:15px;cursor:pointer" data-badge="0" id = "cart">CART</span>
         </nav>
     </div>
     </header>
